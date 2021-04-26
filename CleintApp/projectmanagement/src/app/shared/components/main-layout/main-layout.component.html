@@ -1,0 +1,102 @@
+<div class="header">
+  <div class="header_text">Управление проектами</div>
+  <div class="header-buttons">
+    <button class="header-button" (click)="openRegistrationModal = true">Регистрация</button>
+    <button class="header-button">Войти</button>
+  </div>
+</div>
+
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
+
+<div class="modal" [ngClass]="{open: openRegistrationModal}" (click)="openRegistrationModal = false">
+  <div class="modal-dialog">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h3>Регистрация</h3>
+        <a title="Close" class="close" (click)="openRegistrationModal = false">×</a>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formRegistration" (ngSubmit)="submit()">
+          <div class="form-control"
+               [ngClass]="{invalid: formRegistration.get('email').touched && formRegistration.get('email').invalid}"
+          >
+            <label for="email" class="modal-body_label">Введите email:</label>
+            <input type="text" id="email" class="modal-body_input" formControlName="email">
+            <div
+              class="validation"
+              *ngIf="formRegistration.get('email').touched && formRegistration.get('email').invalid"
+            >
+              <small
+                *ngIf="formRegistration.get('email').errors.required"
+              >Поле не может быть пустым</small>
+              <small
+                *ngIf="formRegistration.get('email').errors.email"
+              >Введён некоректный email</small>
+            </div>
+          </div>
+
+          <div class="form-control"
+               [ngClass]="{invalid: formRegistration.get('password').touched && formRegistration.get('password').invalid}"
+          >
+            <label for="password" class="modal-body_label">Введите пароль:</label>
+            <input type="password" id="password" class="modal-body_input" formControlName="password">
+            <div
+              class="validation"
+              *ngIf="formRegistration.get('password').touched && formRegistration.get('password').invalid"
+            >
+              <small
+                *ngIf="formRegistration.get('password').errors.required"
+              >Поле не может быть пустым</small>
+            </div>
+          </div>
+
+          <div class="form-control"
+               [ngClass]="{invalid: formRegistration.get('passwordConfirm').touched && formRegistration.get('passwordConfirm').invalid}"
+          >
+            <label for="passwordTrue" class="modal-body_label">Повторите пароль:</label>
+            <input type="password" id="passwordTrue" class="modal-body_input" formControlName="passwordConfirm">
+            <div
+              class="validation"
+              *ngIf="formRegistration.get('passwordConfirm').touched && formRegistration.get('passwordConfirm').invalid"
+            >
+              <small
+                *ngIf="formRegistration.get('passwordConfirm').errors.required"
+              >Поле не может быть пустым</small>
+              <small
+                *ngIf="formRegistration.get('passwordConfirm').errors.mustMatch"
+              >Пароли не совпадают</small>
+            </div>
+
+          </div>
+
+          <div class="form-control"
+               [ngClass]="{invalid: formRegistration.get('fio').touched && formRegistration.get('fio').invalid}"
+          >
+            <label for="fio" class="modal-body_label">Введите ФИО:</label>
+            <input type="text" id="fio" class="modal-body_input" formControlName="fio">
+            <div
+              class="validation"
+              *ngIf="formRegistration.get('fio').touched && formRegistration.get('fio').invalid"
+            >
+              <small
+                *ngIf="formRegistration.get('fio').errors.required"
+              >Поле не может быть пустым</small>
+            </div>
+          </div>
+
+
+          <div class="modal-body_wrap">
+            <button
+              type="submit"
+              class="modal-body_button"
+              [ngClass]="{invalid: formRegistration.invalid || submitted}"
+              [disabled]="formRegistration.invalid || submitted"
+            >Отправить</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

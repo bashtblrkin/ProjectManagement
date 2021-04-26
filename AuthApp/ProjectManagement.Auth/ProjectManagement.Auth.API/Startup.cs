@@ -30,6 +30,7 @@ namespace ProjectManagement.Auth.API
                     Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddControllers();
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,6 +42,13 @@ namespace ProjectManagement.Auth.API
             }
 
             app.UseRouting();
+
+            app.UseCors(builder =>
+            {
+                builder.AllowAnyOrigin();
+                builder.AllowAnyMethod();
+                builder.AllowAnyHeader();
+            });
 
             app.UseEndpoints(endpoints =>
             {
