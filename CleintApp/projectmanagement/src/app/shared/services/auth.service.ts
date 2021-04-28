@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {Account} from '../interfaces/interfaces';
-import {Observable} from 'rxjs';
+import {Observable, throwError} from 'rxjs';
 import {environment} from '../../../environments/environment';
+import {catchError, delay} from 'rxjs/operators';
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
@@ -10,7 +11,10 @@ export class AuthService {
   }
 
   register(account: Account): Observable<any> {
-    console.log('Post request')
     return this.http.post(`${environment.authDbUrl}/accounts/create`, account)
+      .pipe(
+        catchError((error: HttpErrorResponse) => throwError(error))
+      )
   }
+
 }

@@ -12,12 +12,13 @@ using Npgsql.EntityFrameworkCore.PostgreSQL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using ProjectManagement.Auth.API.models;
+using ProjectManagement.Auth.Common;
 
 namespace ProjectManagement.Auth.API
 {
     public class Startup
     {
-       public IConfiguration Configuration { get; }
+        public IConfiguration Configuration { get; }
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -29,11 +30,13 @@ namespace ProjectManagement.Auth.API
                 options.UseNpgsql(
                     Configuration.GetConnectionString("DefaultConnection")));
 
+            var authOptionsConfiguration = Configuration.GetSection("Auth");
+            services.Configure<AuthOptions>(authOptionsConfiguration);
+
             services.AddControllers();
             services.AddCors();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

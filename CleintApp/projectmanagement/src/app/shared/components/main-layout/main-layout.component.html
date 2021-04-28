@@ -2,7 +2,7 @@
   <div class="header_text">Управление проектами</div>
   <div class="header-buttons">
     <button class="header-button" (click)="openRegistrationModal = true">Регистрация</button>
-    <button class="header-button">Войти</button>
+    <button class="header-button" (click)="openSignInModal">Войти</button>
   </div>
 </div>
 
@@ -10,9 +10,9 @@
   <router-outlet></router-outlet>
 </div>
 
-<div class="modal" [ngClass]="{open: openRegistrationModal}" (click)="openRegistrationModal = false">
+<div class="modal" [ngClass]="{open: openRegistrationModal}" (mousedown)="openRegistrationModal = false">
   <div class="modal-dialog">
-    <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-content" (mousedown)="$event.stopPropagation()">
       <div class="modal-header">
         <h3>Регистрация</h3>
         <a title="Close" class="close" (click)="openRegistrationModal = false">×</a>
@@ -34,6 +34,9 @@
               <small
                 *ngIf="formRegistration.get('email').errors.email"
               >Введён некоректный email</small>
+              <small
+                *ngIf="formRegistration.get('email').errors.uniqEmail"
+              >Данный email существует</small>
             </div>
           </div>
 
@@ -49,6 +52,9 @@
               <small
                 *ngIf="formRegistration.get('password').errors.required"
               >Поле не может быть пустым</small>
+              <small
+                *ngIf="formRegistration.get('password').errors.minlength"
+              >Пароль должен содержать минимум 6 символов</small>
             </div>
           </div>
 
@@ -67,6 +73,9 @@
               <small
                 *ngIf="formRegistration.get('passwordConfirm').errors.mustMatch"
               >Пароли не совпадают</small>
+              <small
+                *ngIf="formRegistration.get('passwordConfirm').errors.minlength"
+              >Пароль должен содержать минимум 6 символов</small>
             </div>
 
           </div>
@@ -93,10 +102,23 @@
               class="modal-body_button"
               [ngClass]="{invalid: formRegistration.invalid || submitted}"
               [disabled]="formRegistration.invalid || submitted"
-            >Отправить</button>
+            >Отправить
+            </button>
           </div>
         </form>
       </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" [ngClass]="{open: openSignInModal}">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Вход</h3>
+        <a title="Close" class="close" (click)="openSignInModal = false">×</a>
+      </div>
+      <div class="modal-body"></div>
     </div>
   </div>
 </div>

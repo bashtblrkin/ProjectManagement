@@ -1,0 +1,5 @@
+C:\Users\batur\Desktop\ProjectManagement\AuthApp\ProjectManagement.Auth\ProjectManagement.Auth\bin\Debug\netstandard2.0\ProjectManagement.Auth.Common.deps.json
+C:\Users\batur\Desktop\ProjectManagement\AuthApp\ProjectManagement.Auth\ProjectManagement.Auth\bin\Debug\netstandard2.0\ProjectManagement.Auth.Common.dll
+C:\Users\batur\Desktop\ProjectManagement\AuthApp\ProjectManagement.Auth\ProjectManagement.Auth\obj\Debug\netstandard2.0\ProjectManagement.Auth.Common.csprojAssemblyReference.cache
+C:\Users\batur\Desktop\ProjectManagement\AuthApp\ProjectManagement.Auth\ProjectManagement.Auth\obj\Debug\netstandard2.0\ProjectManagement.Auth.Common.AssemblyInfoInputs.cache
+C:\Users\batur\Desktop\ProjectManagement\AuthApp\ProjectManagement.Auth\ProjectManagement.Auth\obj\Debug\netstandard2.0\ProjectManagement.Auth.Common.AssemblyInfo.cs
