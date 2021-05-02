@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  authDbUrl: 'http://localhost:61870/api'
+  authApi: 'http://localhost:61870/',
+  projectManagementApi: 'http://localhost:56299/',
+  tokenWhiteListedDomains: ['localhost:56299']
 };
 
 /*

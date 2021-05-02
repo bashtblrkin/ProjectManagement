@@ -2,7 +2,7 @@
   <div class="header_text">Управление проектами</div>
   <div class="header-buttons">
     <button class="header-button" (click)="openRegistrationModal = true">Регистрация</button>
-    <button class="header-button" (click)="openSignInModal">Войти</button>
+    <button class="header-button" (click)="openSignInModal = true">Войти</button>
   </div>
 </div>
 
@@ -33,7 +33,7 @@
               >Поле не может быть пустым</small>
               <small
                 *ngIf="formRegistration.get('email').errors.email"
-              >Введён некоректный email</small>
+              >Введён некорректный email</small>
               <small
                 *ngIf="formRegistration.get('email').errors.uniqEmail"
               >Данный email существует</small>
@@ -111,14 +111,72 @@
   </div>
 </div>
 
-<div class="modal" [ngClass]="{open: openSignInModal}">
+<div class="modal"  [ngClass]="{open: openSignInModal}" (mousedown)="openSignInModal = false">
   <div class="modal-dialog">
-    <div class="modal-content">
+    <div class="modal-content" (mousedown)="$event.stopPropagation()">
       <div class="modal-header">
         <h3>Вход</h3>
         <a title="Close" class="close" (click)="openSignInModal = false">×</a>
       </div>
-      <div class="modal-body"></div>
+      <div class="modal-body">
+        <form [formGroup]="formLogin" (ngSubmit)="submitLogin()">
+
+          <div class="form-control"
+               [ngClass]="{invalid: formLogin.get('email').touched && formLogin.get('email').invalid}"
+          >
+            <label for="emailLogin" class="modal-body_label">Введите email:</label>
+            <input type="text" id="emailLogin" class="modal-body_input" formControlName="email">
+            <div
+              class="validation"
+              *ngIf="formLogin.get('email').touched && formLogin.get('email').invalid"
+            >
+              <small
+                *ngIf="formLogin.get('email').errors.required"
+              >Поле не может быть пустым</small>
+              <small
+                *ngIf="formLogin.get('email').errors.email"
+              >Введён некорректный email</small>
+              <small
+                *ngIf="formLogin.get('email').errors.uniqEmail"
+              >Данный email не существует</small>
+            </div>
+          </div>
+
+
+          <div class="form-control"
+               [ngClass]="{invalid: formLogin.get('password').touched && formLogin.get('password').invalid}"
+          >
+            <label for="passwordLogin" class="modal-body_label">Введите пароль:</label>
+            <input type="password" id="passwordLogin" class="modal-body_input" formControlName="password">
+            <div
+              class="validation"
+              *ngIf="formLogin.get('password').touched && formLogin.get('password').invalid"
+            >
+              <small
+                *ngIf="formLogin.get('password').errors.required"
+              >Поле не может быть пустым</small>
+              <small
+                *ngIf="formLogin.get('password').errors.minlength"
+              >Пароль должен содержать минимум 6 символов</small>
+              <small
+                *ngIf="formLogin.get('password').errors.incorrectPas"
+              >Введён некорректный пароль</small>
+            </div>
+          </div>
+
+
+          <div class="modal-body_wrap">
+            <button
+              type="submit"
+              class="modal-body_button"
+              [ngClass]="{invalid: formLogin.invalid || submitted}"
+              [disabled]="formLogin.invalid || submitted"
+            >Войти
+            </button>
+          </div>
+
+        </form>
+      </div>
     </div>
   </div>
 </div>

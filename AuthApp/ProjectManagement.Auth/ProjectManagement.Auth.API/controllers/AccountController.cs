@@ -13,18 +13,22 @@ using ProjectManagement.Auth.Common;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net;
+using System.IO;
+using System.Net.Http;
+using System.Net.Http.Headers;
+
 
 namespace ProjectManagement.Auth.API.controllers
 {
-    [Route("api/accounts")]
+    [Route("api/auth")]
     [ApiController]
     public class AccountController : Controller
     {
         ApplicationContext db;
         MD5 md5 = MD5.Create();
-
         public IOptions<AuthOptions> AuthOptions { get; }
-
+        private static readonly HttpClient client = new HttpClient();
         public AccountController(ApplicationContext context, IOptions<AuthOptions> authOptions)
         {
             db = context;
@@ -35,11 +39,17 @@ namespace ProjectManagement.Auth.API.controllers
         [HttpPost]
         public IActionResult Login([FromBody]Login request)
         {
-            var user = AuthentificateUser(request.Email, request.Password);
-
-            if (user != null)
+            var user = uniqEmail(request.Email);
+            if (user == null)
             {
-                var token = GenerateJWT(user);
+                return BadRequest("Email not found");
+            }
+            
+            var authUser = AuthentificateUser(request.Email, request.Password);
+
+            if (authUser != null)
+            {
+                var token = GenerateJWT(authUser);
 
                 return Ok(new
                 {
@@ -53,19 +63,24 @@ namespace ProjectManagement.Auth.API.controllers
 
         [Route("create")]
         [HttpPost]
-        public IActionResult Create([FromBody]Account account)
+        public async Task<IActionResult> Create([FromBody]Account account)
         {
             if (ModelState.IsValid)
             {
-                var user = db.Accounts.SingleOrDefault(s => s.email == account.email);
+                var user = uniqEmail(account.email);
                 if (user != null)
                 {
                     return BadRequest("Email exists");
                 }
+
                 account.password = CreateMD5(account.password);
                 db.Accounts.Add(account);
                 db.SaveChanges();
-                return Ok(account);
+
+                var createdUser = GetUser(account.email);
+
+                var url = await PostRequestAsyncAddUser(createdUser);
+                return Ok(url);
             }
             return BadRequest(ModelState);
         }
@@ -83,6 +98,22 @@ namespace ProjectManagement.Auth.API.controllers
             return sb.ToString();
         }
 
+        private User GetUser(string email)
+        {
+            var account = db.Accounts.SingleOrDefault(u => u.email == email);
+            if(account != null)
+            {
+                User user = new User
+                {
+                    id = account.id,
+                    email = account.email,
+                    fio = account.fio,
+                    created_at = DateTime.Now
+                };
+                return user;
+            }
+            return new User();
+        }
         private Account AuthentificateUser(string email, string password)
         {
             string encPassword = CreateMD5(password);
@@ -109,6 +140,21 @@ namespace ProjectManagement.Auth.API.controllers
                 signingCredentials: credentials);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+        private Account uniqEmail(string email)
+        {
+            return db.Accounts.SingleOrDefault(s => s.email == email);
+        }
+
+        private static async Task<Uri> PostRequestAsyncAddUser(User user)
+        {
+            
+            HttpResponseMessage response = await client.PostAsJsonAsync(
+                "http://localhost:56299/api/users/create", user);
+            response.EnsureSuccessStatusCode();
+
+            return response.Headers.Location;
         }
     }
 }
