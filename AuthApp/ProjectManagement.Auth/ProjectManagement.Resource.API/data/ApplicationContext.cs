@@ -20,6 +20,8 @@ namespace ProjectManagement.Resource.API.data
         public DbSet<User> Users { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<Role> Roles { get; set; }
+
+        public DbSet<ProjectUser> ProjectUser { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Project>()

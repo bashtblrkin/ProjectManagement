@@ -153,4 +153,11 @@
   color: red;
 }
 
+.container {
+  max-width: 1400px;
+  margin: auto;
+  overflow: hidden;
+  padding: 0 2rem;
+}
+
 /*# sourceMappingURL=main-layout.component.css.map */

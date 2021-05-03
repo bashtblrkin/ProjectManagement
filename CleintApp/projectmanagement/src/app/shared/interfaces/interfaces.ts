@@ -7,3 +7,20 @@ export interface Account {
 export interface Token {
   access_token: string
 }
+
+export interface User {
+  userId: string
+  email: string
+  fio: string
+  created_at: string
+  phone?: string
+  avatar?: string
+}
+
+export interface minProject {
+  id: string
+  title: string
+  description: string
+  role: string
+  users: User[]
+}

@@ -4,6 +4,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Account} from '../../interfaces/interfaces';
 import {AuthService} from '../../services/auth.service';
 import {ConfirmedValidators} from '../../validators/confirmed.validators';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-main-layout',
@@ -20,7 +21,8 @@ export class MainLayoutComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
     ) {
   }
 
@@ -97,6 +99,7 @@ export class MainLayoutComponent implements OnInit {
     this.authService.login(this.formLogin.value.email, this.formLogin.value.password)
       .subscribe( res => {
         this.submitted = false
+        this.router.navigate(['user', 'projects'])
       }, error => {
         if (error.error === "Email not found") {
           this.formLogin.get('email').setErrors({

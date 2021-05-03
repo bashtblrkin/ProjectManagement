@@ -27,13 +27,27 @@ namespace ProjectManagement.Resource.API.cotntrollers
         [Route("")]
         [Authorize]
         [HttpGet]
-        public IActionResult GetProjects(int? id)
+        public IActionResult GetProjects()
         {
-            if (id != null)
+            if (userId != null)
             {
-                var user = db.Users.Include(u => u.Projects).Where(u => u.UserId == id).ToList();
-                
-                return Ok(user);
+                //var user = db.Users.Where(u => u.UserId == Convert.ToInt32(userId)).Include(u => u.Projects).ToList();
+
+                var projects = from projectuser in db.ProjectUser
+                               join project in db.Projects on projectuser.ProjectId equals project.ProjectId
+                               join user in db.Users on projectuser.UserId equals user.UserId
+                               join role in db.Roles on projectuser.RoleId equals role.Id
+                               where user.UserId == Convert.ToInt32(userId)
+                               select new
+                               {    
+                                   Id = project.ProjectId,
+                                   Title = project.name,
+                                   Description = project.description,
+                                   Role = role.name,
+                                   Users = project.Users
+                               };
+
+                return Ok(projects);
             }
             return BadRequest(ModelState);
         }

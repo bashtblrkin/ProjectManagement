@@ -26,10 +26,11 @@ img {
 }
 
 .container {
-  max-width: 1400px;
-  margin: auto;
-  overflow: hidden;
-  padding: 0 2rem;
+  margin: 30px 10px;
+  width: 81vw;
+  height: 85vh;
+  display: flex;
+  flex-direction: row;
 }
 
 /*# sourceMappingURL=styles.css.map */

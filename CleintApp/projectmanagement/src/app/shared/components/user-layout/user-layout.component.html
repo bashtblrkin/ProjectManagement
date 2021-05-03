@@ -1,0 +1,40 @@
+<div class="wrap">
+  <div class="nav">
+    <h2>Управление проектами</h2>
+    <ul>
+      <li class="nav-item open">
+        <img src="./assets/img/icons/project.png">
+        <a >Проекты</a>
+      </li>
+      <li class="nav-item">
+        <img src="./assets/img/icons/tasks.png">
+        <a >Мои задачи</a>
+      </li>
+      <li class="nav-item">
+        <img src="./assets/img/icons/diagram.png">
+        <a >Диаграмма ганта</a>
+      </li>
+      <li class="nav-item">
+        <img src="./assets/img/icons/optimization.png">
+        <a >Оптимизация</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="div">
+    <div class="user-panel">
+      <div class="input-wrap">
+        <input type="text" placeholder="Поиск" [(ngModel)]="searchStr">
+      </div>
+      <div class="content-wrap">
+        <a >Настройки</a>
+        <img src="./assets/img/data%20transfer.png" class="avatar">
+      </div>
+    </div>
+    <div class="user-components">
+      <router-outlet></router-outlet>
+    </div>
+
+  </div>
+
+</div>

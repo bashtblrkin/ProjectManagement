@@ -2,12 +2,21 @@ import { NgModule } from '@angular/core';
 import {Routes, RouterModule, PreloadAllModules} from '@angular/router';
 import {MainLayoutComponent} from './shared/components/main-layout/main-layout.component';
 import {HomePageComponent} from './home-page/home-page.component';
+import {UserLayoutComponent} from './shared/components/user-layout/user-layout.component';
+import {ProjectsPageComponent} from './projects-page/projects-page.component';
+import {AuthGuard} from './guard/auth.guard';
 
 const routes: Routes = [
   {
     path: '', component: MainLayoutComponent, children: [
       {path: '', redirectTo: '/', pathMatch: 'full'},
       {path: '', component: HomePageComponent},
+    ]
+  },
+  {
+    path: 'user', component: UserLayoutComponent, children: [
+      {path: '', redirectTo: 'projects', pathMatch: 'full'},
+      {path: 'projects', component: ProjectsPageComponent, canActivate: [AuthGuard]}
     ]
   }
 ];

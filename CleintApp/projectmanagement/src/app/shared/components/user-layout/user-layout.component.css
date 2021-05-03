@@ -1,0 +1,135 @@
+.wrap {
+  display: flex;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  height: 95vh;
+  width: 300px;
+  background-color: #FFFFFF;
+  box-shadow: 0px 5px 25px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  margin: 30px 30px;
+  align-items: center;
+}
+.nav ul {
+  width: 100%;
+}
+.nav-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  cursor: pointer;
+}
+.nav-item:hover {
+  opacity: 0.8;
+}
+.nav-item.open {
+  border-right: 5px solid var(--button-color);
+  background: linear-gradient(269.91deg, #4A5BF4 -39.4%, rgba(196, 196, 196, 0) 82.44%);
+}
+.nav-item a {
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+}
+.nav-item img {
+  margin-left: 30px;
+  margin-right: 10px;
+  height: 30px;
+  width: 30px;
+}
+
+h2 {
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  margin: 30px 0;
+}
+
+.user-panel {
+  height: 60px;
+  width: 80vw;
+  background-color: #FFFFFF;
+  box-shadow: 0px 5px 25px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  margin: 30px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 50px;
+}
+.user-panel .input-wrap {
+  position: relative;
+}
+.user-panel .input-wrap:before {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  content: "";
+  background-image: url(/assets/img/icons/loupe.svg);
+  background-size: 100%;
+  width: 20px;
+  height: 20px;
+}
+.user-panel input {
+  background: rgba(196, 196, 196, 0.27);
+  border-radius: 20px;
+  border: none;
+  height: 40px;
+  padding: 5px 40px;
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+}
+.user-panel input::placeholder {
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+}
+.user-panel input:focus {
+  outline: none;
+}
+.user-panel .content-wrap {
+  display: flex;
+  align-items: center;
+}
+.user-panel a {
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  margin-right: 20px;
+  position: relative;
+}
+.user-panel a:hover {
+  cursor: pointer;
+}
+.user-panel a:before {
+  position: absolute;
+  top: 4px;
+  left: -25px;
+  content: "";
+  background-image: url(/assets/img/icons/settings.svg);
+  background-size: 100%;
+  width: 20px;
+  height: 20px;
+}
+.user-panel img {
+  border-radius: 100px;
+  width: 50px;
+  height: 50px;
+}
+
+.user-components {
+  margin: 30px 10px;
+  width: 81vw;
+  height: 85vh;
+}
+
+/*# sourceMappingURL=user-layout.component.css.map */

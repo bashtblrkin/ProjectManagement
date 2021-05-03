@@ -12,6 +12,7 @@ namespace ProjectManagement.Resource.API.models
         public User User { get; set; }
         public int ProjectId { get; set; }
         public Project Project { get; set; }
-        public List<Role> Roles { get; set; }
+        public int RoleId { get; set; }
+        public Role Role { get; set; }
     }
 }
