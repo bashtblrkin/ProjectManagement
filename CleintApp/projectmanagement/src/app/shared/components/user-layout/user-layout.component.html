@@ -27,8 +27,14 @@
         <input type="text" placeholder="Поиск" [(ngModel)]="searchStr">
       </div>
       <div class="content-wrap">
-        <a >Настройки</a>
-        <img src="./assets/img/data%20transfer.png" class="avatar">
+        <a (click)="openSettings = !openSettings" >Мой аккаунт</a>
+        <div *ngIf="openSettings" class="settings-menu">
+            <ul>
+              <li class="settings-menu_item">Редактирование</li>
+              <li class="settings-menu_item" (click)="logout()">Выйти</li>
+            </ul>
+        </div>
+        <img *ngIf="user"  src="{{user.avatar}}" class="avatar">
       </div>
     </div>
     <div class="user-components">

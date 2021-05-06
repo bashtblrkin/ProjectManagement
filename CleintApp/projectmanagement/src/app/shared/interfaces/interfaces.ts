@@ -24,3 +24,9 @@ export interface minProject {
   role: string
   users: User[]
 }
+
+export interface NewProject {
+  name: string
+  description: string
+  created_at: Date
+}

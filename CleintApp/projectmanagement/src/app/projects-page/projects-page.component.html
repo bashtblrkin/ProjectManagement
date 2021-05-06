@@ -1,24 +1,32 @@
 
-  <div *ngIf="minProject$ | async as projects; else loading" class="container">
-    <div *ngFor="let project of projects | searchProjects:searchStr"  >
 
-      <div class="card">
-        <h2>{{project.title}}</h2>
-        <p class="card-text">{{project.description}}</p>
-        <div
-          class="card-role"
-          [ngClass]="{
+
+    <div *ngIf="minProject$ | async as projects; else loading" class="container">
+      <div class="card-newproject" (click)="navigateToNewProject()">
+        <img src="assets/img/plus.png" class="card-newproject-img" alt="">
+        <h3>Создать проект</h3>
+      </div>
+
+      <div *ngFor="let project of projects | searchProjects:searchStr" class="card">
+
+          <h2>{{project.title}}</h2>
+          <p class="card-text">{{project.description}}</p>
+          <div
+            class="card-role"
+            [ngClass]="{
               manager: project.role === 'Менеджер',
               director: project.role === 'Директор',
               user: project.role === 'Пользователь'
           }"
-        >
-          <p class="card-role_text">{{project.role}}</p>
-        </div>
+          >
+            <p class="card-role_text">{{project.role}}</p>
+          </div>
+
       </div>
 
     </div>
-  </div>
+
+
 
   <ng-template #loading>Идёт загрузка...</ng-template>
 

@@ -97,6 +97,7 @@ h2 {
   .content-wrap {
     display: flex;
     align-items: center;
+    position: relative;
   }
   a {
     font-family: Roboto, sans-serif;
@@ -130,4 +131,21 @@ h2 {
   margin: 30px 10px;
   width: 81vw;
   height: 85vh;
+}
+
+.settings-menu {
+  position: absolute;
+  top: 65px;
+  left: -20px;
+  background-color: #FFFFFF;
+  box-shadow: 0px 5px 25px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  padding: 10px 20px;
+  &_item {
+
+    &:hover {
+      cursor: pointer;
+      opacity: 0.8;
+    }
+  }
 }

@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="form-wrap">
+    <form [formGroup]="form" class="form" (ngSubmit)="createProject()">
+      <h2>Создание проекта</h2>
+      <div
+        class="form-control"
+        [ngClass]="{invalid: form.get('name').touched && form.get('name').invalid}"
+      >
+        <label for="name" class="form-label">Введите название проекта:</label>
+        <input type="text" id="name" class="form-input" formControlName="name">
+        <div
+          class="validation"
+          *ngIf="form.get('name').touched && form.get('name').invalid"
+        >
+            <small
+              *ngIf="form.get('name').errors.required"
+            >
+              Поле не может быть пустым
+            </small>
+        </div>
+      </div>
+
+      <div
+        class="form-control"
+        [ngClass]="{invalid: form.get('description').touched && form.get('description').invalid}"
+      >
+        <label for="description" class="form-label">Введите краткое описание проекта:</label>
+        <textarea id="description" class="form-textarea" formControlName="description"> </textarea>
+        <div
+          class="validation"
+          *ngIf="form.get('description').touched && form.get('description').invalid"
+        >
+          <small
+            *ngIf="form.get('description').errors.required"
+          >
+            Поле не может быть пустым
+          </small>
+        </div>
+      </div>
+
+      <div class="form-button-wrap">
+        <button
+          type="submit"
+          class="form-button"
+          [ngClass]="{invalid: form.invalid || submitted}"
+          [disabled]="form.invalid || submitted"
+        >Создать
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

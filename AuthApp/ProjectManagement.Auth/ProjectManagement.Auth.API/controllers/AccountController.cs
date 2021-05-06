@@ -105,10 +105,11 @@ namespace ProjectManagement.Auth.API.controllers
             {
                 User user = new User
                 {
-                    id = account.id,
+                    UserId = account.id,
                     email = account.email,
                     fio = account.fio,
-                    created_at = DateTime.Now
+                    created_at = DateTime.Now,
+                    avatar = "https://ui-avatars.com/api/?name=" + account.fio + "&rounded=true&color=ffffff&background=4A5BF4"
                 };
                 return user;
             }

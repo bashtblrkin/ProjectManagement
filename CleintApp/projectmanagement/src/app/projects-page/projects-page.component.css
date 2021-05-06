@@ -1,8 +1,9 @@
 .card {
-  max-height: 40vh;
+  height: 300px;
+  overflow: hidden;
   width: 19vw;
   background: #FFFFFF;
-  box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.25);
   border-radius: 15px;
   padding: 20px 20px;
   display: inline-block;
@@ -25,6 +26,11 @@
   font-weight: normal;
   font-size: 18px;
   margin-bottom: 20px;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .card-role {
   display: inline-block;
@@ -36,6 +42,36 @@
   font-weight: 600;
   font-size: 14px;
   text-transform: uppercase;
+}
+.card-newproject {
+  background: #FFFFFF;
+  box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  padding: 20px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 12px;
+  transition: all 0.2s ease-in-out;
+  width: 19vw;
+  height: 300px;
+}
+.card-newproject:hover {
+  cursor: pointer;
+  transform: translate(-5px, -5px);
+}
+.card-newproject-img {
+  max-width: 90px;
+  max-height: 90px;
+  margin-bottom: 10px;
+  opacity: 0.4;
+}
+.card-newproject h3 {
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
 }
 
 .manager {

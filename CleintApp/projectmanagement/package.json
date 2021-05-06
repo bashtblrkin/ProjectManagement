@@ -21,6 +21,8 @@
     "@angular/router": "~11.0.9",
     "@auth0/angular-jwt": "^5.0.2",
     "i": "^0.3.6",
+    "masonry-layout": "^4.2.2",
+    "ngx-masonry": "^11.0.1",
     "npm": "^7.11.2",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

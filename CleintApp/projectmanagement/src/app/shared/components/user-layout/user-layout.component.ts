@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {DatasearchService} from '../../services/datasearch.service';
+import {UserService} from '../../services/user.service';
+import {User} from '../../interfaces/interfaces';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-user-layout',
@@ -7,11 +11,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserLayoutComponent implements OnInit {
 
-  searchStr = ''
+  user: User
+  openSettings: boolean = false
 
-  constructor() { }
+  constructor(
+    private dataSearchService: DatasearchService,
+    private userService: UserService,
+    private authService: AuthService) { }
 
+  set searchStr(searchStr: string) {
+      this.dataSearchService.searchStr.next(searchStr)
+  }
   ngOnInit(): void {
+      this.userService.getUser().subscribe( user => {
+        this.user = user
+      })
   }
 
+  logout() {
+    this.authService.logout()
+  }
 }

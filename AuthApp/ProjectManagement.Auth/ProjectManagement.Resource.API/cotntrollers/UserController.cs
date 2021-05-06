@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ProjectManagement.Resource.API.data;
@@ -15,6 +17,7 @@ namespace ProjectManagement.Resource.API.cotntrollers
     {
         ApplicationContext db;
 
+        private string userId => User.Claims.Single(c => c.Type == ClaimTypes.NameIdentifier).Value;
         public UserController(ApplicationContext context)
         {
             db = context;
@@ -31,6 +34,24 @@ namespace ProjectManagement.Resource.API.cotntrollers
                 return Ok(user);
             }
             return BadRequest(ModelState);
+        }
+
+        [Route("im")]
+        [Authorize]
+        [HttpGet]
+        public IActionResult Get()
+        {
+            User user = GetUser();
+            if (user != null)
+            {
+                return Ok(user);
+            }
+            return BadRequest();
+        }
+
+        public User GetUser()
+        {
+            return db.Users.SingleOrDefault(user => user.UserId == Convert.ToInt32(userId));
         }
     }
 }

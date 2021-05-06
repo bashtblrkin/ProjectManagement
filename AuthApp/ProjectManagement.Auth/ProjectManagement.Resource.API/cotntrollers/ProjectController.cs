@@ -31,8 +31,6 @@ namespace ProjectManagement.Resource.API.cotntrollers
         {
             if (userId != null)
             {
-                //var user = db.Users.Where(u => u.UserId == Convert.ToInt32(userId)).Include(u => u.Projects).ToList();
-
                 var projects = from projectuser in db.ProjectUser
                                join project in db.Projects on projectuser.ProjectId equals project.ProjectId
                                join user in db.Users on projectuser.UserId equals user.UserId
@@ -51,5 +49,42 @@ namespace ProjectManagement.Resource.API.cotntrollers
             }
             return BadRequest(ModelState);
         }
+
+        [Route("create")]
+        [Authorize]
+        [HttpPost]
+        public IActionResult CreateProject(Project project)
+        {
+            if (ModelState.IsValid)
+            {
+                User user = GetUser(userId);
+                Role role = GetRole(3);
+                if (user != null && role != null)
+                {
+                    project.owner = Convert.ToInt32(userId);
+                    ProjectUser projectUser = new ProjectUser()
+                    {   
+                        Project = project,
+                        User = user,
+                        Role = role
+                    };
+                    db.ProjectUser.Add(projectUser);
+                    db.SaveChanges();
+                    return Ok();
+                }
+            }
+            return BadRequest();
+        }
+
+        private User GetUser(string id)
+        {
+            return db.Users.SingleOrDefault(user => user.UserId == Convert.ToInt32(userId));
+        }
+
+        private Role GetRole(int id)
+        {
+            return db.Roles.SingleOrDefault(role => role.Id == id);
+        }
+
     }
 }

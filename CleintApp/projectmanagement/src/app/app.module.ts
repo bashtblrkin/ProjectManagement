@@ -14,6 +14,9 @@ import {ACCESS_TOKEN_KEY} from './shared/services/auth.service';
 import { UserLayoutComponent } from './shared/components/user-layout/user-layout.component';
 import { ProjectsPageComponent } from './projects-page/projects-page.component';
 import {SearchPipe} from './shared/pipes/search.pipe';
+import { CreateProjectPageComponent } from './create-project-page/create-project-page.component';
+import {NgxMasonryModule} from 'ngx-masonry';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 export function tokenGetter() {
   return localStorage.getItem(ACCESS_TOKEN_KEY)
@@ -26,21 +29,23 @@ export function tokenGetter() {
     HomePageComponent,
     UserLayoutComponent,
     ProjectsPageComponent,
-    SearchPipe
+    SearchPipe,
+    CreateProjectPageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-
+    NgxMasonryModule,
     JwtModule.forRoot({
       config: {
         tokenGetter,
         allowedDomains: environment.tokenWhiteListedDomains
       }
     }),
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule
   ],
   providers: [{
       provide: AUTH_API_URL,

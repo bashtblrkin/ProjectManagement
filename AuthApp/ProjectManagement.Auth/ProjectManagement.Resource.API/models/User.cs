@@ -20,7 +20,7 @@ namespace ProjectManagement.Resource.API.models
         public string phone { get; set; }
         public string avatar { get; set; }
 
-        public virtual ICollection<Project> Projects { get; set; }
+        public virtual ICollection<Project> Projects { get; set; } = new List<Project>();
         public List<ProjectUser> ProjectUsers { get; set; }
     }
 }

@@ -20,7 +20,7 @@ export class AuthService {
   ) {}
 
   register(account: Account): Observable<any> {
-    return this.http.post(`${environment.authApi}/accounts/create`, account)
+    return this.http.post(`${environment.authApi}api/auth/create`, account)
       .pipe(
         catchError((error: HttpErrorResponse) => throwError(error))
       )
