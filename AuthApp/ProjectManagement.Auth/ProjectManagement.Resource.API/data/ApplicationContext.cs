@@ -41,6 +41,10 @@ namespace ProjectManagement.Resource.API.data
                          j.HasKey(t => new { t.UserId, t.ProjectId });
                      }
                  );
+
+            modelBuilder.Entity<Project>()
+                .HasOne(p => p.Owner)
+                .WithMany(u => u.OwnerProjects);
         }
     }
 }

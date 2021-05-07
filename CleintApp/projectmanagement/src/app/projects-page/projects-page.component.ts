@@ -23,9 +23,6 @@ export class ProjectsPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.minProject$ = this.projectService.getProjects()
-    this.minProject$.subscribe(projects => {
-      console.log(projects)
-    })
     this.dataSearchService.searchStr.subscribe(str => {
       this.searchStr = str
     })

@@ -1,6 +1,6 @@
 <div class="container">
   <div class="form-wrap">
-    <form [formGroup]="form" class="form" (ngSubmit)="createProject()">
+    <form *ngIf="!created; else projectcreated" [formGroup]="form" class="form" (ngSubmit)="createProject()">
       <h2>Создание проекта</h2>
       <div
         class="form-control"
@@ -48,5 +48,14 @@
         </button>
       </div>
     </form>
+
+    <ng-template #projectcreated>
+      <div class="created">
+        <img src="assets/img/icons/success.svg" alt="">
+        <p>Проект успешно создан!</p>
+        <a [routerLink]="['/user', 'projects']">Проекты</a>
+      </div>
+
+    </ng-template>
   </div>
 </div>

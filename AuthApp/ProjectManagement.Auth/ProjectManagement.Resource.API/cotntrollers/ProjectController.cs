@@ -61,7 +61,7 @@ namespace ProjectManagement.Resource.API.cotntrollers
                 Role role = GetRole(3);
                 if (user != null && role != null)
                 {
-                    project.owner = Convert.ToInt32(userId);
+                    project.Owner = user;
                     ProjectUser projectUser = new ProjectUser()
                     {   
                         Project = project,
@@ -76,9 +76,40 @@ namespace ProjectManagement.Resource.API.cotntrollers
             return BadRequest();
         }
 
+        [Route("adduser")]
+        [Authorize]
+        [HttpPost]
+        public IActionResult AddUserToProject(UserToProject userToProject)
+        {   
+            var user = GetUserByEmail(userToProject.email);
+            if (user != null)
+            {
+                var userTopProject = GetProjectUser(user.UserId, userToProject.ProjectId);
+                if (userTopProject != null)
+                {
+                    return BadRequest("USER_ALREADY_EXIST");
+                }
+                ProjectUser projectUser = new ProjectUser()
+                {
+                    ProjectId = userToProject.ProjectId,
+                    UserId = user.UserId,
+                    RoleId = userToProject.RoleId
+                };
+                db.ProjectUser.Add(projectUser);
+                db.SaveChanges();
+                return Ok("SUCCESS");
+            }
+            return BadRequest("EMAIL_NOT_FOUND");
+        }
+
         private User GetUser(string id)
         {
             return db.Users.SingleOrDefault(user => user.UserId == Convert.ToInt32(userId));
+        }
+
+        private User GetUserByEmail(string email)
+        {
+            return db.Users.SingleOrDefault(user => user.email == email);
         }
 
         private Role GetRole(int id)
@@ -86,5 +117,9 @@ namespace ProjectManagement.Resource.API.cotntrollers
             return db.Roles.SingleOrDefault(role => role.Id == id);
         }
 
+        private ProjectUser GetProjectUser(int UserId, int ProjectId)
+        {
+            return db.ProjectUser.SingleOrDefault(pu => pu.UserId == UserId && pu.ProjectId == ProjectId);
+        }
     }
 }

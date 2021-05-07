@@ -1,27 +1,35 @@
-
-
-
-    <div *ngIf="minProject$ | async as projects; else loading" class="container">
+ <div *ngIf="minProject$ | async as projects; else loading" class="container">
       <div class="card-newproject" (click)="navigateToNewProject()">
         <img src="assets/img/plus.png" class="card-newproject-img" alt="">
         <h3>Создать проект</h3>
       </div>
 
-      <div *ngFor="let project of projects | searchProjects:searchStr" class="card">
+      <div *ngFor="let project of projects | searchProjects:searchStr" class="card" [routerLink]="['/user', 'projects', project.id]">
 
           <h2>{{project.title}}</h2>
           <p class="card-text">{{project.description}}</p>
-          <div
-            class="card-role"
-            [ngClass]="{
+          <div class="wrap">
+            <div
+              class="card-role"
+              [ngClass]="{
               manager: project.role === 'Менеджер',
               director: project.role === 'Директор',
               user: project.role === 'Пользователь'
           }"
-          >
-            <p class="card-role_text">{{project.role}}</p>
+            >
+              <p class="card-role_text">{{project.role}}</p>
+            </div>
+            <div class="user-list">
+              <div  *ngFor="let user of project.users; let idx = index">
+                <div *ngIf="idx < 2">
+                  <img class="user-avatar" src="{{user.avatar}}" alt="">
+                </div>
+              </div>
+              <div *ngIf="project.users.length > 3">
+                <p class="avatar-text">+{{ project.users.length - 2 }}</p>
+              </div>
+            </div>
           </div>
-
       </div>
 
     </div>

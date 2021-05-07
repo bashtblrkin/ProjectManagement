@@ -17,6 +17,7 @@ import {SearchPipe} from './shared/pipes/search.pipe';
 import { CreateProjectPageComponent } from './create-project-page/create-project-page.component';
 import {NgxMasonryModule} from 'ngx-masonry';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { ProjectPageComponent } from './project-page/project-page.component';
 
 export function tokenGetter() {
   return localStorage.getItem(ACCESS_TOKEN_KEY)
@@ -30,7 +31,8 @@ export function tokenGetter() {
     UserLayoutComponent,
     ProjectsPageComponent,
     SearchPipe,
-    CreateProjectPageComponent
+    CreateProjectPageComponent,
+    ProjectPageComponent
   ],
   imports: [
     BrowserModule,

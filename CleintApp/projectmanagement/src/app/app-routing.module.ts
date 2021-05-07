@@ -6,6 +6,7 @@ import {UserLayoutComponent} from './shared/components/user-layout/user-layout.c
 import {ProjectsPageComponent} from './projects-page/projects-page.component';
 import {AuthGuard} from './guard/auth.guard';
 import {CreateProjectPageComponent} from './create-project-page/create-project-page.component';
+import {ProjectPageComponent} from './project-page/project-page.component';
 
 const routes: Routes = [
   {
@@ -18,7 +19,8 @@ const routes: Routes = [
     path: 'user', component: UserLayoutComponent, children: [
       {path: '', redirectTo: 'projects', pathMatch: 'full'},
       {path: 'projects', component: ProjectsPageComponent, canActivate: [AuthGuard]},
-      {path: 'projects/create', component: CreateProjectPageComponent, canActivate: [AuthGuard]}
+      {path: 'projects/create', component: CreateProjectPageComponent, canActivate: [AuthGuard]},
+      {path: 'projects/:id', component: ProjectPageComponent, canActivate: [AuthGuard]}
     ]
   }
 ];

@@ -10,7 +10,9 @@ namespace ProjectManagement.Resource.API.models
         public int? ProjectId { get; set; }
         public string name { get; set; }
         public string description { get; set; }
-        public int owner { get; set; }
+        
+        public int OwnerUserId { get; set; }
+        public User Owner { get; set; }
         public DateTime created_at { get; set; }
 
         public virtual ICollection<User> Users { get; set; } = new List<User>();

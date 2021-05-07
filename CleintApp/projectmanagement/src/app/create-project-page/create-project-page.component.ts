@@ -12,6 +12,7 @@ export class CreateProjectPageComponent implements OnInit {
 
   form: FormGroup
   submitted: boolean = false
+  created: boolean = false
 
   constructor(
     private projectService: ProjectService
@@ -41,7 +42,7 @@ export class CreateProjectPageComponent implements OnInit {
     this.projectService.createProject(project).subscribe(res => {
       this.submitted = false
       this.form.reset()
-
+      this.created = true
     })
   }
 }

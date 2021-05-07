@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {minProject, NewProject} from '../interfaces/interfaces';
 import {RESOURCE_API_URL} from '../../app-injection-tokens';
+import {tap} from 'rxjs/operators';
 
 
 @Injectable({providedIn: 'root'})

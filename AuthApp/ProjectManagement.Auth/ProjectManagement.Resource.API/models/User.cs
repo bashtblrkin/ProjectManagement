@@ -10,6 +10,7 @@ namespace ProjectManagement.Resource.API.models
     {
         [Required]
         public int UserId { get; set; }
+
         [Required]
         public string email { get; set; }
         [Required]
@@ -21,6 +22,8 @@ namespace ProjectManagement.Resource.API.models
         public string avatar { get; set; }
 
         public virtual ICollection<Project> Projects { get; set; } = new List<Project>();
+
+        public virtual ICollection<Project> OwnerProjects { get; set; } = new List<Project>();
         public List<ProjectUser> ProjectUsers { get; set; }
     }
 }
