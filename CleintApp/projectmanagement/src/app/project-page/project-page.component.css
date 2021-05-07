@@ -1,3 +1,152 @@
+.wrap {
+  width: 100%;
+  height: 100%;
+  background: #FFFFFF;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  padding: 20px 20px;
+  margin: 0 10px;
+}
 
+.header {
+  display: flex;
+}
+.header-text {
+  width: 60vw;
+}
+.header-text_title {
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+}
+.header-text_description {
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+}
+.header-info {
+  margin-left: 40px;
+  display: flex;
+  flex-direction: column;
+}
+.header-info-director {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.header-info-director label {
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+}
+.header-info-director img {
+  margin-left: 20px;
+  width: 60px;
+  height: 60px;
+}
+.header-info_date {
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+}
+
+.additive {
+  display: flex;
+}
+
+.add {
+  display: flex;
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.09);
+  border-radius: 15px;
+  background: #EFEFEF;
+  padding: 5px 10px;
+  margin: 20px 10px;
+}
+.add:first-child {
+  margin-left: 0;
+}
+.add:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+.add img {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+.add p {
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.form {
+  display: flex;
+}
+.form-control.invalid input {
+  border-color: red;
+}
+.form input {
+  display: inline-block;
+  border: 1px solid var(--button-color);
+  box-sizing: border-box;
+  border-radius: 25px;
+  height: 40px;
+  width: 300px;
+  font-size: 18px;
+  padding: 0 10px;
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+}
+.form input:focus {
+  outline: none;
+}
+.form select {
+  margin: 0 0 0 20px;
+  height: 38px;
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  border: 1px solid var(--button-color);
+  border-radius: 10px;
+}
+.form select:focus {
+  outline: none;
+}
+.form button {
+  display: inline-block;
+  margin: 0 20px;
+  width: 250px;
+  height: 38px;
+  background: var(--button-color);
+  border-radius: 25px;
+  border: none;
+  color: #FFFFFF;
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+}
+.form button:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+.form button.invalid {
+  opacity: 1;
+  cursor: default;
+}
+
+.validation {
+  color: red;
+}
 
 /*# sourceMappingURL=project-page.component.css.map */

@@ -30,3 +30,17 @@ export interface NewProject {
   description: string
   created_at: Date
 }
+
+export interface Project {
+  name: string
+  description: string
+  created_at: Date
+  role: string
+  owner_avatar: string
+}
+
+export interface UserToProject {
+  ProjectId: string
+  email: string
+  RoleId: string
+}

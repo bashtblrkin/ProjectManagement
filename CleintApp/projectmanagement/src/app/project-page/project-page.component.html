@@ -1,3 +1,76 @@
 <div class="container">
-  <p>project-page works!</p>
+  <div class="wrap" *ngIf="project">
+
+    <div class="header">
+
+      <div class="header-text">
+        <h2 class="header-text_title">{{project.name}}</h2>
+        <p class="header-text_description">{{project.description}}</p>
+      </div>
+
+      <div class="header-info">
+        <div class="header-info-director">
+          <label for="director_avatar">Директор проекта:</label>
+          <img src="{{project.owner_avatar}}" id="director_avatar">
+        </div>
+        <p class="header-info_date">Дата создания: {{project.created_at | date: 'longDate': null: 'ru'}}</p>
+      </div>
+
+    </div>
+
+    <div class="additive" *ngIf="project.role != 'Пользователь'">
+
+      <div class="add" *ngIf="project.role === 'Менеджер' || project.role === 'Директор'">
+        <img src="assets/img/plus.png" alt="">
+        <p>Добавить задание</p>
+      </div>
+      <div class="add" *ngIf="project.role === 'Директор'" (click)="toggleFormAddUser()">
+        <img src="assets/img/plus.png" alt="">
+        <p>Добавить участника</p>
+      </div>
+
+    </div>
+
+    <form [formGroup]="formAddUser" *ngIf="openFormAddUser" class="form" (ngSubmit)="addUser()">
+
+
+      <div class="form-control"
+           [ngClass]="{invalid: formAddUser.get('email').touched && formAddUser.get('email').invalid}"
+      >
+        <input type="text" formControlName="email" placeholder="Введите email">
+        <div class="validation"
+             *ngIf="formAddUser.get('email').touched && formAddUser.get('email').invalid"
+        >
+          <small
+            *ngIf="formAddUser.get('email').errors.required"
+          >Поле не может быть пустым</small>
+          <small
+            *ngIf="formAddUser.get('email').errors.email"
+          >Введён некорректный email</small>
+          <small
+            *ngIf="formAddUser.get('email').errors.uniqEmail"
+          >Пользователя с таким email не существует</small>
+          <small
+            *ngIf="formAddUser.get('email').errors.alreadyExistEmail"
+          >Пользователь с таким email уже участвует в проекте</small>
+        </div>
+      </div>
+
+      <div class="form-control">
+        <select formControlName="role" >
+          <option value="1">Менеджер</option>
+          <option value="2">Пользователь</option>
+        </select>
+      </div>
+
+      <button
+        type="submit"
+        class="modal-body_button"
+        [ngClass]="{invalid: formAddUser.invalid || submitted}"
+        [disabled]="formAddUser.invalid || submitted"
+      >Добавить
+      </button>
+    </form>
+
+  </div>
 </div>

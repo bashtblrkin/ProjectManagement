@@ -18,10 +18,14 @@ import { CreateProjectPageComponent } from './create-project-page/create-project
 import {NgxMasonryModule} from 'ngx-masonry';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ProjectPageComponent } from './project-page/project-page.component';
+import {registerLocaleData} from '@angular/common';
+import ruLocale from '@angular/common/locales/ru';
 
 export function tokenGetter() {
   return localStorage.getItem(ACCESS_TOKEN_KEY)
 }
+
+registerLocaleData(ruLocale, 'ru')
 
 @NgModule({
   declarations: [

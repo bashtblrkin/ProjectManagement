@@ -97,9 +97,35 @@ namespace ProjectManagement.Resource.API.cotntrollers
                 };
                 db.ProjectUser.Add(projectUser);
                 db.SaveChanges();
-                return Ok("SUCCESS");
+                return Ok(projectUser);
             }
             return BadRequest("EMAIL_NOT_FOUND");
+        }
+
+        [Route("project")]
+        [Authorize]
+        [HttpGet]
+        public IActionResult GetCurrentProject(int id)
+        {   
+            var currentProject = from projectuser in db.ProjectUser
+                                 join project in db.Projects on projectuser.ProjectId equals project.ProjectId
+                                 join user in db.Users on projectuser.UserId equals user.UserId
+                                 join role in db.Roles on projectuser.RoleId equals role.Id
+                                 join owner in db.Users on project.OwnerUserId equals owner.UserId
+                                 where project.ProjectId == id && user.UserId == Convert.ToInt32(userId)
+                                 select new
+                                 {
+                                     name = project.name,
+                                     description = project.description,
+                                     created_at = project.created_at,
+                                     role = role.name,
+                                     owner_avatar = owner.avatar
+                                 };
+            if (currentProject != null)
+            {
+                return Ok(currentProject);
+            }
+            return BadRequest();
         }
 
         private User GetUser(string id)
@@ -121,5 +147,6 @@ namespace ProjectManagement.Resource.API.cotntrollers
         {
             return db.ProjectUser.SingleOrDefault(pu => pu.UserId == UserId && pu.ProjectId == ProjectId);
         }
+
     }
 }
