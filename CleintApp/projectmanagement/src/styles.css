@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto");
+@import "~flatpickr/dist/flatpickr.css";
 :root {
   --button-color: #4A5BF4;
   --backround-color: #F9F7F7;
@@ -25,7 +26,7 @@ img {
   width: 100%;
 }
 
-.container {
+.mycontainer {
   margin: 30px 0;
   width: 81vw;
   display: flex;

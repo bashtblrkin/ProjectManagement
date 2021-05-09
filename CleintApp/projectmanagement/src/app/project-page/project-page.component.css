@@ -149,4 +149,157 @@
   color: red;
 }
 
+table {
+  width: 76vw;
+  border-collapse: collapse;
+}
+
+tbody {
+  width: 76vw;
+}
+
+thead {
+  width: 76vw;
+}
+
+.table {
+  width: 76vw;
+  margin-top: 40px;
+}
+
+th {
+  width: 76vw;
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 20px;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-top: none;
+}
+th:first-child {
+  border-left: none;
+  border-top: none;
+}
+th:last-child {
+  border-right: none;
+}
+
+tr {
+  width: 76vw;
+  word-break: break-all;
+}
+
+td {
+  word-break: break-all;
+  padding: 15px;
+  border: 2px solid rgba(0, 0, 0, 0.32);
+  border-bottom: none;
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+}
+td:first-child {
+  border-left: 1px solid rgba(0, 0, 0, 0);
+}
+td:last-child {
+  border-right: none;
+}
+
+.formTask-control.invalid input {
+  border-color: red;
+}
+.formTask-input {
+  display: inline-block;
+  border: 1px solid var(--button-color);
+  box-sizing: border-box;
+  border-radius: 25px;
+  height: 25px;
+  width: 250px;
+  font-size: 18px;
+  padding: 0 10px;
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+}
+.formTask-input:focus {
+  outline: none;
+}
+.formTask-input.special {
+  width: 200px;
+}
+.formTask-input.invalid {
+  border: 2px solid red;
+}
+.formTask .select {
+  height: 25px;
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  border: 1px solid var(--button-color);
+  border-radius: 10px;
+  width: 160px;
+}
+.formTask .select:focus {
+  outline: none;
+}
+.formTask .select.priority {
+  width: 160px;
+}
+.formTask .select.invalid {
+  border: 2px solid red;
+}
+.formTask .button-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.formTask button {
+  display: inline-block;
+  margin: 20px auto;
+  width: 250px;
+  height: 38px;
+  background: var(--button-color);
+  border-radius: 25px;
+  border: none;
+  color: #FFFFFF;
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+}
+.formTask button:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+.formTask button.invalid {
+  opacity: 1;
+  cursor: default;
+}
+
+.important {
+  border-left: 4px solid red !important;
+}
+
+.never-mind {
+  border-left: 4px solid var(--button-color) !important;
+}
+
+.pending {
+  color: #FFFFFF;
+  background-color: rgba(74, 91, 244, 0.6);
+}
+
+.process {
+  color: #FFFFFF;
+  background-color: rgba(255, 0, 0, 0.6);
+}
+
+.done {
+  color: #FFFFFF;
+  background-color: rgba(0, 255, 100, 0.5);
+}
+
 /*# sourceMappingURL=project-page.component.css.map */

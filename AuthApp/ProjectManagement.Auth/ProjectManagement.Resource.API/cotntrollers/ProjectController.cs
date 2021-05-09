@@ -37,7 +37,7 @@ namespace ProjectManagement.Resource.API.cotntrollers
                                join role in db.Roles on projectuser.RoleId equals role.Id
                                where user.UserId == Convert.ToInt32(userId)
                                select new
-                               {    
+                               {
                                    Id = project.ProjectId,
                                    Title = project.name,
                                    Description = project.description,
@@ -63,7 +63,7 @@ namespace ProjectManagement.Resource.API.cotntrollers
                 {
                     project.Owner = user;
                     ProjectUser projectUser = new ProjectUser()
-                    {   
+                    {
                         Project = project,
                         User = user,
                         Role = role
@@ -80,7 +80,7 @@ namespace ProjectManagement.Resource.API.cotntrollers
         [Authorize]
         [HttpPost]
         public IActionResult AddUserToProject(UserToProject userToProject)
-        {   
+        {
             var user = GetUserByEmail(userToProject.email);
             if (user != null)
             {
@@ -106,7 +106,7 @@ namespace ProjectManagement.Resource.API.cotntrollers
         [Authorize]
         [HttpGet]
         public IActionResult GetCurrentProject(int id)
-        {   
+        {
             var currentProject = from projectuser in db.ProjectUser
                                  join project in db.Projects on projectuser.ProjectId equals project.ProjectId
                                  join user in db.Users on projectuser.UserId equals user.UserId
@@ -124,6 +124,26 @@ namespace ProjectManagement.Resource.API.cotntrollers
             if (currentProject != null)
             {
                 return Ok(currentProject);
+            }
+            return BadRequest();
+        }
+
+        [Route("getusers")]
+        [Authorize]
+        [HttpGet]
+        public IActionResult GetUsersOfCurrentProject(int id)
+        {
+            var users = from projectuser in db.ProjectUser
+                        join user in db.Users on projectuser.UserId equals user.UserId
+                        where projectuser.ProjectId == id
+                        select new
+                        {
+                            UserId = user.UserId,
+                            fio = user.fio
+                        };
+            if (users != null)
+            {
+                return Ok(users);
             }
             return BadRequest();
         }

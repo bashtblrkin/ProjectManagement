@@ -15,11 +15,12 @@ import { UserLayoutComponent } from './shared/components/user-layout/user-layout
 import { ProjectsPageComponent } from './projects-page/projects-page.component';
 import {SearchPipe} from './shared/pipes/search.pipe';
 import { CreateProjectPageComponent } from './create-project-page/create-project-page.component';
-import {NgxMasonryModule} from 'ngx-masonry';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ProjectPageComponent } from './project-page/project-page.component';
 import {registerLocaleData} from '@angular/common';
 import ruLocale from '@angular/common/locales/ru';
+import {FlatpickrModule} from 'angularx-flatpickr';
+import { CreateTaskPageComponent } from './create-task-page/create-task-page.component';
 
 export function tokenGetter() {
   return localStorage.getItem(ACCESS_TOKEN_KEY)
@@ -36,22 +37,23 @@ registerLocaleData(ruLocale, 'ru')
     ProjectsPageComponent,
     SearchPipe,
     CreateProjectPageComponent,
-    ProjectPageComponent
+    ProjectPageComponent,
+    CreateTaskPageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgxMasonryModule,
     JwtModule.forRoot({
       config: {
         tokenGetter,
         allowedDomains: environment.tokenWhiteListedDomains
       }
     }),
+    BrowserAnimationsModule,
     FormsModule,
-    BrowserAnimationsModule
+    FlatpickrModule.forRoot()
   ],
   providers: [{
       provide: AUTH_API_URL,

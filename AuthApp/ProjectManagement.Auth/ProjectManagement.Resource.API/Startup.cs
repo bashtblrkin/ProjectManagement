@@ -13,6 +13,8 @@ using ProjectManagement.Resource.API.data;
 using ProjectManagement.Auth.Common;
 using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
 
 namespace ProjectManagement.Resource.API
 {
@@ -64,6 +66,8 @@ namespace ProjectManagement.Resource.API
                 app.UseDeveloperExceptionPage();
             }
 
+
+
             app.UseRouting();
 
             app.UseCors(builder =>
@@ -74,7 +78,20 @@ namespace ProjectManagement.Resource.API
             });
 
             app.UseAuthentication(); 
-            app.UseAuthorization();  
+            app.UseAuthorization();
+
+            var supportedCultures = new[]
+            {
+               new CultureInfo("ru-RU"),
+
+            };
+
+            app.UseRequestLocalization(new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture("ru-RU"),
+                SupportedCultures = supportedCultures,
+                SupportedUICultures = supportedCultures
+            });
 
             app.UseEndpoints(endpoints =>
             {

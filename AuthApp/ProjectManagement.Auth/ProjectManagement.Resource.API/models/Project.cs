@@ -17,5 +17,7 @@ namespace ProjectManagement.Resource.API.models
 
         public virtual ICollection<User> Users { get; set; } = new List<User>();
         public List<ProjectUser> ProjectUsers { get; set; }
+
+        public List<DbTask> Tasks { get; set; }
     }
 }

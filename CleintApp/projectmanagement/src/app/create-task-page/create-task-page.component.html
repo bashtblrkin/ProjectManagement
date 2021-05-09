@@ -1,0 +1,163 @@
+<div class="mycontainer">
+  <div class="form-wrap">
+    <form *ngIf="!created; else taskcreated" [formGroup]="formAddTask" (ngSubmit)="addTask()" class="form">
+      <h2>Создание задачи</h2>
+
+      <div
+        class="form-control"
+        [ngClass]="{invalid: formAddTask.get('name').touched && formAddTask.get('name').invalid}"
+      >
+        <label for="name" class="form-label">Введите название задания:</label>
+        <input type="text" id="name" class="form-input" formControlName="name">
+        <div
+          class="validation"
+          *ngIf="formAddTask.get('name').touched && formAddTask.get('name').invalid"
+        >
+          <small
+            *ngIf="formAddTask.get('name').errors.required"
+          >
+            Поле не может быть пустым
+          </small>
+        </div>
+      </div>
+
+
+      <div
+        class="form-control"
+        [ngClass]="{invalid: formAddTask.get('description').touched && formAddTask.get('description').invalid}"
+      >
+        <label for="description" class="form-label">Введите описание задания:</label>
+        <textarea id="description" class="form-textarea" formControlName="description"> </textarea>
+        <div
+          class="validation"
+          *ngIf="formAddTask.get('description').touched && formAddTask.get('description').invalid"
+        >
+          <small
+            *ngIf="formAddTask.get('description').errors.required"
+          >
+            Поле не может быть пустым
+          </small>
+        </div>
+      </div>
+
+
+      <div
+        class="form-control"
+        [ngClass]="{invalid: formAddTask.get('start_date').touched && formAddTask.get('start_date').invalid}"
+      >
+        <label for="start_date" class="form-label">Выберите дату начала выполнения задания:</label>
+        <input
+          [ngClass]="{invalid: formAddTask.get('start_date').touched && formAddTask.get('start_date').invalid}"
+          class="form-input"
+          id="start_date"
+          type="text"
+          mwlFlatpickr
+          [convertModelValue]="true"
+          [enableTime]="true"
+          [options]="options"
+          dateFormat="Y-m-d H:i"
+          formControlName="start_date"
+        >
+        <div
+          class="validation"
+          *ngIf="formAddTask.get('start_date').touched && formAddTask.get('start_date').invalid"
+        >
+          <small
+            *ngIf="formAddTask.get('start_date').errors.required"
+          >
+            Поле не может быть пустым
+          </small>
+        </div>
+      </div>
+
+      <div
+        class="form-control"
+        [ngClass]="{invalid: formAddTask.get('end_date').touched && formAddTask.get('end_date').invalid}"
+      >
+        <label for="end_date" class="form-label">Выберите дату окончания выполнения задания:</label>
+        <input
+          [ngClass]="{invalid: formAddTask.get('end_date').touched && formAddTask.get('end_date').invalid}"
+          class="form-input"
+          id="end_date"
+          type="text"
+          mwlFlatpickr
+          [convertModelValue]="true"
+          [enableTime]="true"
+          [options]="options"
+          dateFormat="Y-m-d H:i"
+          formControlName="end_date"
+        >
+        <div
+          class="validation"
+          *ngIf="formAddTask.get('end_date').touched && formAddTask.get('end_date').invalid"
+        >
+          <small
+            *ngIf="formAddTask.get('end_date').errors.required"
+          >
+            Поле не может быть пустым
+          </small>
+        </div>
+      </div>
+
+
+        <div
+          class="form-control"
+          [ngClass]="{invalid: formAddTask.get('executor').touched && formAddTask.get('executor').invalid}"
+        >
+          <label for="executor" class="form-label">Выберите испольнителя задания:</label>
+          <select *ngIf="usersOfProject$ | async as users" formControlName="executor" id="executor">
+            <option value="{{user.userId}}" *ngFor="let user of users">{{user.fio}}</option>
+          </select>
+          <div
+            class="validation"
+            *ngIf="formAddTask.get('executor').touched && formAddTask.get('executor').invalid"
+          >
+            <small
+              *ngIf="formAddTask.get('executor').errors.required"
+            >
+              Поле не может быть пустым
+            </small>
+          </div>
+        </div>
+
+      <div
+        class="form-control"
+        [ngClass]="{invalid: formAddTask.get('priority').touched && formAddTask.get('priority').invalid}"
+      >
+        <label for="priority" class="form-label">Выберите испольнителя задания:</label>
+        <select formControlName="priority" id="priority">
+          <option value="1">Важно</option>
+          <option value="2">Неважно</option>
+        </select>
+        <div
+          class="validation"
+          *ngIf="formAddTask.get('priority').touched && formAddTask.get('priority').invalid"
+        >
+          <small
+            *ngIf="formAddTask.get('priority').errors.required"
+          >
+            Поле не может быть пустым
+          </small>
+        </div>
+      </div>
+
+      <div class="form-button-wrap">
+        <button
+          type="submit"
+          class="form-button"
+          [ngClass]="{invalid: formAddTask.invalid || submitted}"
+          [disabled]="formAddTask.invalid || submitted"
+        >Создать
+        </button>
+      </div>
+    </form>
+
+    <ng-template #taskcreated>
+      <div class="created">
+        <img src="assets/img/icons/success.svg" alt="">
+        <p>Задание успешно создано!</p>
+        <a [routerLink]="['/user', 'projects', route.snapshot.params['id']]">Назад к проекту</a>
+      </div>
+    </ng-template>
+  </div>
+</div>

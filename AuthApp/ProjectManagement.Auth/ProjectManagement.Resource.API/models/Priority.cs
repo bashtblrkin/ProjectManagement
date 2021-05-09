@@ -5,10 +5,11 @@ using System.Threading.Tasks;
 
 namespace ProjectManagement.Resource.API.models
 {
-    public class Task
+    public class Priority
     {
-        public int TaskId { get; set; }
+        public int PriorityId { get; set; }
+        public string name { get; set; }
 
-
+        public List<DbTask> Tasks { get; set; }
     }
 }

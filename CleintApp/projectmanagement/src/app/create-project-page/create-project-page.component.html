@@ -1,4 +1,4 @@
-<div class="container">
+<div class="mycontainer">
   <div class="form-wrap">
     <form *ngIf="!created; else projectcreated" [formGroup]="form" class="form" (ngSubmit)="createProject()">
       <h2>Создание проекта</h2>
@@ -48,6 +48,7 @@
         </button>
       </div>
     </form>
+
 
     <ng-template #projectcreated>
       <div class="created">

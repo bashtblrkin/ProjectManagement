@@ -44,3 +44,28 @@ export interface UserToProject {
   email: string
   RoleId: string
 }
+
+export interface UsersOfProject {
+  userId: string
+  fio: string
+}
+
+export interface AddTask {
+  UserId: string
+  ProjectId: string
+  name: string
+  description: string
+  start_date: string
+  end_date: string
+  PriorityId: string
+}
+
+export interface Task {
+  name: string
+  description: string
+  start_date: Date
+  end_date: Date
+  executor: string
+  status: string
+  priority: string
+}

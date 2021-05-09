@@ -1,9 +1,13 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ProjectService} from '../shared/services/project.service';
-import {ActivatedRoute, Params} from '@angular/router';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 import {switchMap} from 'rxjs/operators';
-import {Project, UserToProject} from '../shared/interfaces/interfaces';
+import {Project, Task,  UserToProject} from '../shared/interfaces/interfaces';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Observable} from 'rxjs';
+
+
+
 
 @Component({
   selector: 'app-project-page',
@@ -12,14 +16,17 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 })
 export class ProjectPageComponent implements OnInit {
 
+  projectId: string
   project: Project
   submitted: boolean = false
   formAddUser: FormGroup
   openFormAddUser: boolean = false
+  tasks$: Observable<Task[]>
 
   constructor(
     private projectService: ProjectService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
   }
 
@@ -29,10 +36,9 @@ export class ProjectPageComponent implements OnInit {
           return this.projectService.getProjectById(params['id'])
       })
     ).subscribe( (project: Project[]) => {
-      console.log(project)
       this.project = project[0]
     })
-
+    this.tasks$ = this.projectService.getTasks(this.route.snapshot.params['id'])
   }
 
 

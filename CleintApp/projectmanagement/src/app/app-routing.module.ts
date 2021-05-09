@@ -7,6 +7,7 @@ import {ProjectsPageComponent} from './projects-page/projects-page.component';
 import {AuthGuard} from './guard/auth.guard';
 import {CreateProjectPageComponent} from './create-project-page/create-project-page.component';
 import {ProjectPageComponent} from './project-page/project-page.component';
+import {CreateTaskPageComponent} from './create-task-page/create-task-page.component';
 
 const routes: Routes = [
   {
@@ -20,7 +21,8 @@ const routes: Routes = [
       {path: '', redirectTo: 'projects', pathMatch: 'full'},
       {path: 'projects', component: ProjectsPageComponent, canActivate: [AuthGuard]},
       {path: 'projects/create', component: CreateProjectPageComponent, canActivate: [AuthGuard]},
-      {path: 'projects/:id', component: ProjectPageComponent, canActivate: [AuthGuard]}
+      {path: 'projects/:id', component: ProjectPageComponent, canActivate: [AuthGuard]},
+      {path: 'projects/:id/create/task', component: CreateTaskPageComponent, canActivate: [AuthGuard]}
     ]
   }
 ];
