@@ -5,7 +5,7 @@ import {minProject} from '../interfaces/interfaces';
 @Pipe({
   name: 'searchProjects'
 })
-export class SearchPipe implements PipeTransform{
+export class SearchProjectsPipe implements PipeTransform{
   transform(projects: minProject[], search = ''): minProject[] {
     if(!search.trim())
     {

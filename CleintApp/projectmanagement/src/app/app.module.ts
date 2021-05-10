@@ -13,7 +13,8 @@ import {JwtModule} from '@auth0/angular-jwt';
 import {ACCESS_TOKEN_KEY} from './shared/services/auth.service';
 import { UserLayoutComponent } from './shared/components/user-layout/user-layout.component';
 import { ProjectsPageComponent } from './projects-page/projects-page.component';
-import {SearchPipe} from './shared/pipes/search.pipe';
+import {SearchProjectsPipe} from './shared/pipes/searchProjects.pipe';
+import {SearchTasksPipe} from './shared/pipes/searchTasks.pipe'
 import { CreateProjectPageComponent } from './create-project-page/create-project-page.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ProjectPageComponent } from './project-page/project-page.component';
@@ -21,6 +22,7 @@ import {registerLocaleData} from '@angular/common';
 import ruLocale from '@angular/common/locales/ru';
 import {FlatpickrModule} from 'angularx-flatpickr';
 import { CreateTaskPageComponent } from './create-task-page/create-task-page.component';
+import { TaskPageComponent } from './task-page/task-page.component';
 
 export function tokenGetter() {
   return localStorage.getItem(ACCESS_TOKEN_KEY)
@@ -35,10 +37,12 @@ registerLocaleData(ruLocale, 'ru')
     HomePageComponent,
     UserLayoutComponent,
     ProjectsPageComponent,
-    SearchPipe,
+    SearchProjectsPipe,
     CreateProjectPageComponent,
     ProjectPageComponent,
-    CreateTaskPageComponent
+    CreateTaskPageComponent,
+    TaskPageComponent,
+    SearchTasksPipe
   ],
   imports: [
     BrowserModule,

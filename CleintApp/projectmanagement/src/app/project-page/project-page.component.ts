@@ -5,6 +5,7 @@ import {switchMap} from 'rxjs/operators';
 import {Project, Task,  UserToProject} from '../shared/interfaces/interfaces';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Observable} from 'rxjs';
+import {DatasearchService} from '../shared/services/datasearch.service';
 
 
 
@@ -22,11 +23,12 @@ export class ProjectPageComponent implements OnInit {
   formAddUser: FormGroup
   openFormAddUser: boolean = false
   tasks$: Observable<Task[]>
+  searchStr: string = ''
 
   constructor(
     private projectService: ProjectService,
     private route: ActivatedRoute,
-    private router: Router
+    private dataSearchService: DatasearchService
   ) {
   }
 
@@ -39,6 +41,9 @@ export class ProjectPageComponent implements OnInit {
       this.project = project[0]
     })
     this.tasks$ = this.projectService.getTasks(this.route.snapshot.params['id'])
+    this.dataSearchService.searchStr.subscribe(str => {
+      this.searchStr = str
+    })
   }
 
 

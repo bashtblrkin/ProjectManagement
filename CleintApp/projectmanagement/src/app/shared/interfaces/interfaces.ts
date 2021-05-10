@@ -61,6 +61,7 @@ export interface AddTask {
 }
 
 export interface Task {
+  id: string
   name: string
   description: string
   start_date: Date

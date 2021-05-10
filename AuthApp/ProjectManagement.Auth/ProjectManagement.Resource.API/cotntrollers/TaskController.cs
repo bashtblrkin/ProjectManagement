@@ -36,6 +36,7 @@ namespace ProjectManagement.Resource.API.cotntrollers
                         where task.ProjectId == id
                         select new
                         {   
+                            id = task.DbTaskId,
                             name = task.name,
                             description = task.description,
                             start_date = task.start_date,
@@ -47,6 +48,35 @@ namespace ProjectManagement.Resource.API.cotntrollers
             if (tasks != null)
             {
                 return Ok(tasks);
+            }
+            return BadRequest();
+        }
+
+        [Route("task")]
+        [Authorize]
+        [HttpGet]
+        public IActionResult GetTaskById(int id)
+        {
+            var newTask = from task in db.Tasks
+                        join status in db.Statuses on task.StatusId equals status.StatusId
+                        join priority in db.Priorities on task.PriorityId equals priority.PriorityId
+                        join usertask in db.UserTask on task.DbTaskId equals usertask.TaskId
+                        join user in db.Users on usertask.UserId equals user.UserId
+                        where task.DbTaskId == id
+                        select new
+                        {
+                            id = task.DbTaskId,
+                            name = task.name,
+                            description = task.description,
+                            start_date = task.start_date,
+                            end_date = task.end_date,
+                            executor = user.fio,
+                            status = status.name,
+                            priority = priority.name
+                        };
+            if (newTask != null)
+            {
+                return Ok(newTask);
             }
             return BadRequest();
         }
