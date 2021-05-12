@@ -20,6 +20,7 @@ namespace ProjectManagement.Auth.API.models
         public string phone { get; set; }
         public string avatar { get; set; }
 
+        public string avatar_min { get; set; }
 
     }
 }

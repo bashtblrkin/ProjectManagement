@@ -21,6 +21,8 @@ namespace ProjectManagement.Resource.API.models
         public string phone { get; set; }
         public string avatar { get; set; }
 
+        public string avatar_min { get; set; }
+
         public virtual ICollection<Project> Projects { get; set; } = new List<Project>();
 
         public virtual ICollection<Project> OwnerProjects { get; set; } = new List<Project>();

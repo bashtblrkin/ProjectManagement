@@ -109,7 +109,8 @@ namespace ProjectManagement.Auth.API.controllers
                     email = account.email,
                     fio = account.fio,
                     created_at = DateTime.Now,
-                    avatar = "https://ui-avatars.com/api/?name=" + account.fio + "&rounded=true&color=ffffff&background=4A5BF4"
+                    avatar = "https://ui-avatars.com/api/?name=" + account.fio + "&rounded=true&color=ffffff&background=4A5BF4",
+                    avatar_min = "https://ui-avatars.com/api/?name=" + account.fio + "&rounded=true&color=ffffff&background=4A5BF4"
                 };
                 return user;
             }

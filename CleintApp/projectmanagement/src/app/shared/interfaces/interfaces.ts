@@ -15,6 +15,7 @@ export interface User {
   created_at: string
   phone?: string
   avatar?: string
+  avatar_min?: string
 }
 
 export interface minProject {
@@ -22,7 +23,7 @@ export interface minProject {
   title: string
   description: string
   role: string
-  users: User[]
+  users_avatar: string[]
 }
 
 export interface NewProject {
@@ -37,6 +38,7 @@ export interface Project {
   created_at: Date
   role: string
   owner_avatar: string
+  owner_id: string
 }
 
 export interface UserToProject {
@@ -69,4 +71,31 @@ export interface Task {
   executor: string
   status: string
   priority: string
+  mytask: boolean
+  avatar: string
+  executorId: string
+}
+
+export interface UpdateTask {
+  id: string
+  status: string
+}
+
+export interface TaskUser {
+  projectId: string
+  project: string
+  name: string
+  description: string
+  start_date: string
+  end_date: string
+  status: string
+  priority: string
+  taskId: string
+}
+
+export interface Myfile {
+  name: string
+  size: string
+  type: string
+  base64: string
 }

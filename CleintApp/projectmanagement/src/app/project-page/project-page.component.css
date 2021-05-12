@@ -45,8 +45,13 @@
 }
 .header-info-director img {
   margin-left: 20px;
-  width: 60px;
-  height: 60px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+}
+.header-info-director img:hover {
+  cursor: pointer;
+  border: 1px solid var(--button-color);
 }
 .header-info_date {
   font-family: Roboto, sans-serif;

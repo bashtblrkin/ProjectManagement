@@ -1,0 +1,56 @@
+<div class="mycontainer">
+  <div class="wrap">
+
+    <div *ngIf="user">
+
+
+      <form *ngIf="!updated; else userupdated" class="form" [formGroup]="form" (ngSubmit)="updateAccount()">
+        <h2>Обновление данных аккаунта</h2>
+        <p>ФИО: {{user.fio}}</p>
+        <p>Email: {{user.email}}</p>
+        <div
+          class="form-control"
+        >
+          <label for="phone" class="form-label">Введите телефон:</label>
+          <input type="text" id="phone" class="form-input" formControlName="phone">
+        </div>
+
+        <div
+          class="form-control"
+        >
+          <div class="img-wrap">
+            <img src="{{avatar}}" *ngIf="avatar">
+          </div>
+          <label for="avatar" class="form-label">Загрузите аватар:</label>
+          <div class="form-inputfile">
+            <label>
+              <input type="file" id="avatar" accept="image/gif, image/jpeg" alife-file-to-base64 (onFileChanged)="onFileChanges($event)" (change)="compress($event)" formControlName="avatar">
+              <span>Выберите изображение</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-button-wrap">
+          <button
+            type="submit"
+            class="form-button"
+            [ngClass]="{invalid: submitted}"
+            [disabled]="submitted"
+          >Обновить
+          </button>
+        </div>
+      </form>
+
+      <ng-template #userupdated>
+        <div class="created">
+          <img src="assets/img/icons/success.svg" alt="">
+          <p>Данные успешно обновлены!</p>
+          <a [routerLink]="['/user', 'account']">Мой аккаунт</a>
+        </div>
+
+      </ng-template>
+    </div>
+
+
+  </div>
+</div>

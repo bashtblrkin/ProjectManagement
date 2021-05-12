@@ -1,7 +1,7 @@
 import {Inject, Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Task} from '../interfaces/interfaces';
+import {Task, TaskUser, UpdateTask} from '../interfaces/interfaces';
 import {RESOURCE_API_URL} from '../../app-injection-tokens';
 import {map} from 'rxjs/operators';
 
@@ -23,5 +23,13 @@ export class TaskService {
             return response[0]
         })
       )
+  }
+
+  updateTaskStatus(task: UpdateTask): Observable<UpdateTask> {
+    return this.http.put<any>(`${this.apiUrl}api/tasks/task/update`, task)
+  }
+
+  getTasksByUser(): Observable<TaskUser[]> {
+    return this.http.get<TaskUser[]>(`${this.apiUrl}api/tasks/user`)
   }
 }

@@ -20,13 +20,13 @@
               <p class="card-role_text">{{project.role}}</p>
             </div>
             <div class="user-list">
-              <div  *ngFor="let user of project.users; let idx = index">
+              <div  *ngFor="let avatar of project.users_avatar; let idx = index">
                 <div *ngIf="idx < 2">
-                  <img class="user-avatar" src="{{user.avatar}}" alt="">
+                  <img class="user-avatar" src="{{avatar}}" alt="">
                 </div>
               </div>
-              <div *ngIf="project.users.length > 3">
-                <p class="avatar-text">+{{ project.users.length - 2 }}</p>
+              <div *ngIf="project.users_avatar.length > 3">
+                <p class="avatar-text">+{{ project.users_avatar.length - 2 }}</p>
               </div>
             </div>
           </div>

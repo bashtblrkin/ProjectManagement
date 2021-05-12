@@ -36,6 +36,30 @@ namespace ProjectManagement.Resource.API.cotntrollers
             return BadRequest(ModelState);
         }
 
+        [Route("update")]
+        [Authorize]
+        [HttpPut]
+        public IActionResult Update(User user)
+        {
+            var newUser = GetUser();
+            if (newUser != null)
+            {
+                if (user.avatar != "")
+                {
+                    newUser.avatar = user.avatar;
+                    newUser.avatar_min = user.avatar_min;
+                }
+                if (user.phone != "")
+                {
+                    newUser.phone = user.phone;
+                }
+                db.Users.Update(newUser);
+                db.SaveChanges();
+                return Ok(newUser);
+            }
+            return BadRequest();
+        }
+
         [Route("im")]
         [Authorize]
         [HttpGet]
@@ -49,9 +73,27 @@ namespace ProjectManagement.Resource.API.cotntrollers
             return BadRequest();
         }
 
+        [Route("user")]
+        [Authorize]
+        [HttpGet]
+        public IActionResult GetUser(int id)
+        {
+            User user = GetUserById(id);
+            if (user != null)
+            {
+                return Ok(user);
+            }
+            return BadRequest();
+        }
+
         public User GetUser()
         {
             return db.Users.SingleOrDefault(user => user.UserId == Convert.ToInt32(userId));
+        }
+
+        public User GetUserById(int id)
+        {
+            return db.Users.SingleOrDefault(user => user.UserId == id);
         }
     }
 }

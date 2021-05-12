@@ -57,6 +57,18 @@ namespace ProjectManagement.Resource.API.cotntrollers
         [HttpGet]
         public IActionResult GetTaskById(int id)
         {
+
+            var executor = db.UserTask.SingleOrDefault(ut => ut.TaskId == id);
+            bool mytask = false;
+
+            if (executor != null)
+            {
+                if (executor.UserId == Convert.ToInt32(userId) )
+                {
+                    mytask = true;
+                }
+            }
+
             var newTask = from task in db.Tasks
                         join status in db.Statuses on task.StatusId equals status.StatusId
                         join priority in db.Priorities on task.PriorityId equals priority.PriorityId
@@ -71,8 +83,11 @@ namespace ProjectManagement.Resource.API.cotntrollers
                             start_date = task.start_date,
                             end_date = task.end_date,
                             executor = user.fio,
+                            executorId = user.UserId,
+                            avatar = user.avatar_min,
                             status = status.name,
-                            priority = priority.name
+                            priority = priority.name,
+                            mytask
                         };
             if (newTask != null)
             {
@@ -103,7 +118,8 @@ namespace ProjectManagement.Resource.API.cotntrollers
                             start_date = task.start_date,
                             end_date = task.end_date,
                             status = status.name,
-                            priority = priority.name
+                            priority = priority.name,
+                            taskId = task.DbTaskId
                         };
             if (tasks != null)
             {
@@ -144,6 +160,21 @@ namespace ProjectManagement.Resource.API.cotntrollers
             return BadRequest();
         }
 
+        [Route("task/update")]
+        [Authorize]
+        [HttpPut]
+        public IActionResult UpdateTaskStatus(UpdateTaskStatus task)
+        {
+            var newTask = db.Tasks.SingleOrDefault(t => t.DbTaskId == task.id);
+            if (newTask != null)
+            {
+                newTask.StatusId = task.status;
+                db.Tasks.Update(newTask);
+                db.SaveChanges();
+                return Ok(newTask);
+            }
+            return BadRequest();
+        }
         
 
         private User GetUser(int id)

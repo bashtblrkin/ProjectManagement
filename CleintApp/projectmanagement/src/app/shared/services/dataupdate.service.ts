@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
 
 @Injectable({providedIn: 'root'})
-export class DatasearchService {
-  searchStr = new Subject<string>()
+export class DataupdateService {
   updateUserLayout = new Subject()
 }

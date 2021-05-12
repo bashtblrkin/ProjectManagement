@@ -42,9 +42,14 @@
         font-size: 18px;
       }
       img {
+        &:hover {
+          cursor: pointer;
+          border: 1px solid var(--button-color);
+        }
         margin-left: 20px;
-        width: 60px;
-        height: 60px;
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
       }
     }
     &_date {

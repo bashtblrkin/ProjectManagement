@@ -1,6 +1,60 @@
 <div class="mycontainer">
-  <div *ngIf="task" class="wrap">
+  <div *ngIf="task; else loading" class="wrap">
+      <div class="task">
 
 
+        <div class="task-header">
+          <h2>{{task.description}}</h2>
+          <button class="task-header_button" (click)="goBack()">Назад</button>
+        </div>
+
+
+          <p class="task-description">{{task.description}}</p>
+          <p class="task-start_date">Дата начала работы: {{task.start_date | date:'d MMM , y, HH:mm:ss':null:'ru'}}</p>
+          <p class="task_end_date">Дата окончания работы: {{task.end_date | date:'d MMM , y, HH:mm:ss':null:'ru'}}</p>
+          <div class="task-executor"><p>Испольнитель: </p> <img [routerLink]="['/user', 'account', task.executorId]" src="{{task.avatar}}" alt=""> <p class="task-executor_fio" [routerLink]="['/user', 'account', task.executorId]">{{task.executor}}</p></div>
+          <div class="task-status">
+            <p *ngIf="!task.mytask">Статус: {{task.status}}</p>
+            <form *ngIf="task.mytask && !update" [formGroup]="form" (ngSubmit)="updateStatus()" class="form">
+
+              <div
+                class="form-control"
+                [ngClass]="{invalid: form.get('status').touched && form.get('status').invalid}"
+              >
+                <label for="status" class="form-label">Изменить статус задания:</label>
+                <select formControlName="status" id="status">
+                  <option value="1">В процессе</option>
+                  <option value="2">Готово</option>
+                </select>
+                <div
+                  class="validation"
+                  *ngIf="form.get('status').touched && form.get('status').invalid"
+                >
+                  <small
+                    *ngIf="form.get('status').errors.required"
+                  >
+                    Поле не может быть пустым
+                  </small>
+                </div>
+              </div>
+
+
+              <button
+                type="submit"
+                class="form-button"
+                [ngClass]="{invalid: form.invalid || submitted}"
+                [disabled]="form.invalid || submitted"
+              >Обновить статус
+              </button>
+
+            </form>
+            <p *ngIf="update">Статус успешно обновлён</p>
+          </div>
+
+      </div>
   </div>
+
+
+
+  <ng-template #loading>Идёт загрузка...</ng-template>
 </div>

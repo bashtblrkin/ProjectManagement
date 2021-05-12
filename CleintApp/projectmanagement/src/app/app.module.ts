@@ -6,6 +6,7 @@ import {AppComponent} from './app.component';
 import {MainLayoutComponent} from './shared/components/main-layout/main-layout.component';
 import {HomePageComponent} from './home-page/home-page.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatExpansionModule} from '@angular/material/expansion';
 import {HttpClientModule} from '@angular/common/http';
 import {AUTH_API_URL, RESOURCE_API_URL} from './app-injection-tokens';
 import {environment} from '../environments/environment';
@@ -23,6 +24,12 @@ import ruLocale from '@angular/common/locales/ru';
 import {FlatpickrModule} from 'angularx-flatpickr';
 import { CreateTaskPageComponent } from './create-task-page/create-task-page.component';
 import { TaskPageComponent } from './task-page/task-page.component';
+import { TasksPageComponent } from './tasks-page/tasks-page.component';
+import {NgPipesModule} from 'ngx-pipes';
+import {SearchProjectTasksPipe} from './shared/pipes/searchProjectTasks.pipe';
+import { AccountPageComponent } from './account-page/account-page.component';
+import { AlifeFileToBase64Module } from 'alife-file-to-base64';
+import { UpdateAccountPageComponent } from './update-account-page/update-account-page.component';
 
 export function tokenGetter() {
   return localStorage.getItem(ACCESS_TOKEN_KEY)
@@ -42,7 +49,11 @@ registerLocaleData(ruLocale, 'ru')
     ProjectPageComponent,
     CreateTaskPageComponent,
     TaskPageComponent,
-    SearchTasksPipe
+    SearchTasksPipe,
+    TasksPageComponent,
+    SearchProjectTasksPipe,
+    AccountPageComponent,
+    UpdateAccountPageComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +68,10 @@ registerLocaleData(ruLocale, 'ru')
     }),
     BrowserAnimationsModule,
     FormsModule,
-    FlatpickrModule.forRoot()
+    FlatpickrModule.forRoot(),
+    NgPipesModule,
+    MatExpansionModule,
+    AlifeFileToBase64Module
   ],
   providers: [{
       provide: AUTH_API_URL,

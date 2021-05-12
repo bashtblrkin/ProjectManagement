@@ -2,11 +2,11 @@
   <div class="nav">
     <h2>Управление проектами</h2>
     <ul>
-      <li class="nav-item open" routerLink="/user/projects">
+      <li class="nav-item" routerLink="/user/projects" routerLinkActive="open">
         <img src="./assets/img/icons/project.png">
         <a >Проекты</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" routerLink="/user/tasks" routerLinkActive="open">
         <img src="./assets/img/icons/tasks.png">
         <a >Мои задачи</a>
       </li>
@@ -31,11 +31,11 @@
         <a (click)="openSettings = !openSettings" >Мой аккаунт</a>
         <div *ngIf="openSettings" class="settings-menu">
             <ul>
-              <li class="settings-menu_item">Редактирование</li>
+              <li class="settings-menu_item" [routerLink]="['/user', 'account', 'update']">Редактирование</li>
               <li class="settings-menu_item" (click)="logout()">Выйти</li>
             </ul>
         </div>
-        <img *ngIf="user"  src="{{user.avatar}}" class="avatar">
+        <img *ngIf="user"  src="{{user.avatar_min}}" class="avatar" [routerLink]="['/user', 'account']">
       </div>
     </div>
     <div class="user-components">

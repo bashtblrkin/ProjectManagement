@@ -11,7 +11,7 @@
       <div class="header-info">
         <div class="header-info-director">
           <label for="director_avatar">Директор проекта:</label>
-          <img src="{{project.owner_avatar}}" id="director_avatar">
+          <img src="{{project.owner_avatar}}" [routerLink]="['/user', 'account', project.owner_id]" id="director_avatar">
         </div>
         <p class="header-info_date">Дата создания: {{project.created_at | date: 'longDate': null: 'ru'}}</p>
       </div>

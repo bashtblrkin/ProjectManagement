@@ -42,7 +42,7 @@ namespace ProjectManagement.Resource.API.cotntrollers
                                    Title = project.name,
                                    Description = project.description,
                                    Role = role.name,
-                                   Users = project.Users
+                                   Users_avatar = project.Users.Select(user => user.avatar_min)
                                };
 
                 return Ok(projects);
@@ -119,7 +119,8 @@ namespace ProjectManagement.Resource.API.cotntrollers
                                      description = project.description,
                                      created_at = project.created_at,
                                      role = role.name,
-                                     owner_avatar = owner.avatar
+                                     owner_avatar = owner.avatar_min,
+                                     owner_id = owner.UserId
                                  };
             if (currentProject != null)
             {

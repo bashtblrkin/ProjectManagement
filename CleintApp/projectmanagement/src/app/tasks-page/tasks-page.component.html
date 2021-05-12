@@ -1,0 +1,60 @@
+<div class="mycontainer">
+  <div class="wrap">
+    <h2>Мои задачи</h2>
+
+    <div *ngIf="tasks$ | async as tasks">
+      <div class="project" *ngFor="let task of tasks | SearchProjectTasks:searchStr | groupBy:'project' | pairs ">
+        <mat-expansion-panel class="accord" [expanded]="true">
+
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <div class="project-title">{{task[0]}}</div>
+              </mat-panel-title>
+
+            </mat-expansion-panel-header>
+
+
+            <div class="table-responsive">
+              <table class="table table-bordered">
+                <thead>
+                <tr>
+                  <th>Название</th>
+                  <th>Начало работы</th>
+                  <th>Конец работы</th>
+                  <th>Статус</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr *ngFor="let currenttask of task[1]">
+                  <td
+                    [ngClass]="{
+                      important: currenttask.priority === 'Важно',
+                      'never-mind': currenttask.priority === 'Неважно'
+                      }"
+                    class="task-name"
+                    [routerLink]="['/user', 'task', currenttask.taskId]"
+                  >{{currenttask.name}}</td>
+                  <td>{{currenttask.start_date | date:'d MMM , y, HH:mm:ss':null:'ru'}}</td>
+                  <td>{{currenttask.end_date | date:'d MMM , y, HH:mm:ss':null:'ru'}}</td>
+                  <td
+                    [ngClass]="{
+                      pending: currenttask.status === 'В ожидании',
+                      process: currenttask.status === 'В процессе',
+                      done: currenttask.status === 'Готово'
+                      }"
+                  >{{currenttask.status}}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+
+
+        </mat-expansion-panel>
+      </div>
+
+    </div>
+
+
+  </div>
+</div>
