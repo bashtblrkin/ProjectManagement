@@ -12,7 +12,7 @@
           <p class="task-description">{{task.description}}</p>
           <p class="task-start_date">Дата начала работы: {{task.start_date | date:'d MMM , y, HH:mm:ss':null:'ru'}}</p>
           <p class="task_end_date">Дата окончания работы: {{task.end_date | date:'d MMM , y, HH:mm:ss':null:'ru'}}</p>
-          <div class="task-executor"><p>Испольнитель: </p> <img [routerLink]="['/user', 'account', task.executorId]" src="{{task.avatar}}" alt=""> <p class="task-executor_fio" [routerLink]="['/user', 'account', task.executorId]">{{task.executor}}</p></div>
+          <div class="task-executor"><p>Испольнитель: </p> <img [routerLink]="['/user', 'account', 'get', task.executorId]" src="{{task.avatar}}" alt=""> <p class="task-executor_fio" [routerLink]="['/user', 'account', 'get', task.executorId]">{{task.executor}}</p></div>
           <div class="task-status">
             <p *ngIf="!task.mytask">Статус: {{task.status}}</p>
             <form *ngIf="task.mytask && !update" [formGroup]="form" (ngSubmit)="updateStatus()" class="form">

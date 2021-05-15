@@ -52,6 +52,35 @@ namespace ProjectManagement.Resource.API.cotntrollers
             return BadRequest();
         }
 
+        [Route("project/gant")]
+        [Authorize]
+        [HttpGet]
+        public IActionResult GetTaskGant(int id)
+        {
+            var tasks = from task in db.Tasks
+                        join status in db.Statuses on task.StatusId equals status.StatusId
+                        join priority in db.Priorities on task.PriorityId equals priority.PriorityId
+                        join usertask in db.UserTask on task.DbTaskId equals usertask.TaskId
+                        join user in db.Users on usertask.UserId equals user.UserId
+                        where task.ProjectId == id
+                        select new
+                        {
+                            id = task.DbTaskId,
+                            text = task.name,
+                            start_date = task.start_date.ToString("yyyy-MM-dd HH:mm"),
+                            end_date = task.end_date.ToString("yyyy-MM-dd HH:mm"),
+                            progress = DateTime.Parse(task.end_date.ToString()) < DateTime.Now 
+                            ? 1 : DateTime.Parse(task.start_date.ToString()) > DateTime.Now 
+                            ? 0 : (DateTime.Parse(task.start_date.ToString()).Subtract(DateTime.Now).TotalSeconds) 
+                            / (DateTime.Parse(task.start_date.ToString()).Subtract(DateTime.Parse(task.end_date.ToString())).TotalSeconds)
+                        };
+            if (tasks != null)
+            {
+                return Ok(tasks);
+            }
+            return BadRequest();
+        }
+
         [Route("task")]
         [Authorize]
         [HttpGet]

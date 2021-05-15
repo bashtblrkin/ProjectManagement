@@ -1,0 +1,36 @@
+<div *ngIf="minProject$ | async as projects; else loading" class="mycontainer">
+
+  <div *ngFor="let project of projects | searchProjects:searchStr" class="card" routerLink="{{project.id}}">
+
+    <h2>{{project.title}}</h2>
+    <p class="card-text">{{project.description}}</p>
+    <div class="wrap">
+      <div
+        class="card-role"
+        [ngClass]="{
+              manager: project.role === 'Менеджер',
+              director: project.role === 'Директор',
+              user: project.role === 'Пользователь'
+          }"
+      >
+        <p class="card-role_text">{{project.role}}</p>
+      </div>
+      <div class="user-list">
+        <div  *ngFor="let avatar of project.users_avatar; let idx = index">
+          <div *ngIf="idx < 2">
+            <img class="user-avatar" src="{{avatar}}" alt="">
+          </div>
+        </div>
+        <div *ngIf="project.users_avatar.length > 3">
+          <p class="avatar-text">+{{ project.users_avatar.length - 2 }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+<ng-template #loading>Идёт загрузка...</ng-template>
+

@@ -30,6 +30,8 @@ import {SearchProjectTasksPipe} from './shared/pipes/searchProjectTasks.pipe';
 import { AccountPageComponent } from './account-page/account-page.component';
 import { AlifeFileToBase64Module } from 'alife-file-to-base64';
 import { UpdateAccountPageComponent } from './update-account-page/update-account-page.component';
+import { GantChartComponent } from './gant-chart/gant-chart.component';
+import { GantProjectsComponent } from './gant-projects/gant-projects.component';
 
 export function tokenGetter() {
   return localStorage.getItem(ACCESS_TOKEN_KEY)
@@ -53,7 +55,9 @@ registerLocaleData(ruLocale, 'ru')
     TasksPageComponent,
     SearchProjectTasksPipe,
     AccountPageComponent,
-    UpdateAccountPageComponent
+    UpdateAccountPageComponent,
+    GantChartComponent,
+    GantProjectsComponent
   ],
   imports: [
     BrowserModule,

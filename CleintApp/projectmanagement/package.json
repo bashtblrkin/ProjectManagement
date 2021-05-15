@@ -30,6 +30,7 @@
     "angularx-flatpickr": "^6.5.2",
     "bootstrap": "^4.5.0",
     "date-fns": "^2.16.1",
+    "dhtmlx-gantt": "^7.1.2",
     "flatpickr": "^4.6.9",
     "g": "^2.0.1",
     "i": "^0.3.6",

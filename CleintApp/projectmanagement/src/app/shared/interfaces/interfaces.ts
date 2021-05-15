@@ -99,3 +99,11 @@ export interface Myfile {
   type: string
   base64: string
 }
+
+export interface TaskGantt {
+  id: number
+  start_date: string
+  end_date: string
+  text: string
+  progress: number
+}

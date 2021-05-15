@@ -12,6 +12,8 @@ import {TaskPageComponent} from './task-page/task-page.component';
 import {TasksPageComponent} from './tasks-page/tasks-page.component';
 import {AccountPageComponent} from './account-page/account-page.component';
 import {UpdateAccountPageComponent} from './update-account-page/update-account-page.component';
+import {GantProjectsComponent} from './gant-projects/gant-projects.component';
+import {GantChartComponent} from './gant-chart/gant-chart.component';
 
 const routes: Routes = [
   {
@@ -30,8 +32,10 @@ const routes: Routes = [
       {path: 'task/:id', component: TaskPageComponent, canActivate: [AuthGuard]},
       {path: 'tasks', component: TasksPageComponent, canActivate: [AuthGuard]},
       {path: 'account', component: AccountPageComponent, canActivate: [AuthGuard]},
-      {path: 'account/:id', component: AccountPageComponent, canActivate: [AuthGuard]},
-      {path: 'account/update', component: UpdateAccountPageComponent, canActivate: [AuthGuard]}
+      {path: 'account/get/:id', component: AccountPageComponent, canActivate: [AuthGuard]},
+      {path: 'account/update', component: UpdateAccountPageComponent, canActivate: [AuthGuard]},
+      {path: 'gant/projects', component: GantProjectsComponent, canActivate: [AuthGuard]},
+      {path: 'gant/projects/:id', component: GantChartComponent, canActivate: [AuthGuard]}
     ]
   }
 ];

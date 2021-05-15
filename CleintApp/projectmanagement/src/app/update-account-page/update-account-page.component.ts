@@ -38,7 +38,6 @@ export class UpdateAccountPageComponent implements OnInit {
 
   onFileChanges(event: any) {
     this.avatar = event[0].base64
-    console.log(this.avatar)
   }
 
   updateAccount() {
