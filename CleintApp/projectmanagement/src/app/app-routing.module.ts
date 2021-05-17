@@ -14,6 +14,7 @@ import {AccountPageComponent} from './account-page/account-page.component';
 import {UpdateAccountPageComponent} from './update-account-page/update-account-page.component';
 import {GantProjectsComponent} from './gant-projects/gant-projects.component';
 import {GantChartComponent} from './gant-chart/gant-chart.component';
+import {OptimizationPageComponent} from './optimization-page/optimization-page.component';
 
 const routes: Routes = [
   {
@@ -35,7 +36,8 @@ const routes: Routes = [
       {path: 'account/get/:id', component: AccountPageComponent, canActivate: [AuthGuard]},
       {path: 'account/update', component: UpdateAccountPageComponent, canActivate: [AuthGuard]},
       {path: 'gant/projects', component: GantProjectsComponent, canActivate: [AuthGuard]},
-      {path: 'gant/projects/:id', component: GantChartComponent, canActivate: [AuthGuard]}
+      {path: 'gant/projects/:id', component: GantChartComponent, canActivate: [AuthGuard]},
+      {path: 'optimization', component: OptimizationPageComponent, canActivate: [AuthGuard]}
     ]
   }
 ];

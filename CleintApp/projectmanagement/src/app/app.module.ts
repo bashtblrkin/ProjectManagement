@@ -32,6 +32,7 @@ import { AlifeFileToBase64Module } from 'alife-file-to-base64';
 import { UpdateAccountPageComponent } from './update-account-page/update-account-page.component';
 import { GantChartComponent } from './gant-chart/gant-chart.component';
 import { GantProjectsComponent } from './gant-projects/gant-projects.component';
+import { OptimizationPageComponent } from './optimization-page/optimization-page.component';
 
 export function tokenGetter() {
   return localStorage.getItem(ACCESS_TOKEN_KEY)
@@ -57,7 +58,8 @@ registerLocaleData(ruLocale, 'ru')
     AccountPageComponent,
     UpdateAccountPageComponent,
     GantChartComponent,
-    GantProjectsComponent
+    GantProjectsComponent,
+    OptimizationPageComponent
   ],
   imports: [
     BrowserModule,

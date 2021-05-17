@@ -123,7 +123,7 @@ namespace ProjectManagement.Resource.API.cotntrollers
                                      owner_id = owner.UserId
                                  };
             if (currentProject != null)
-            {
+            {   
                 return Ok(currentProject);
             }
             return BadRequest();

@@ -1,0 +1,25 @@
+<div class="mycontainer">
+  <div class="wrap">
+      <div class="options">
+        <div class="options-wrap">
+          <label for="alternative" >Введите количество альтернативных решений:</label>
+          <input type="text" id="alternative" [(ngModel)]="rows" (ngModelChange)="updateMatrix()">
+        </div>
+        <div class="options-wrap">
+          <label for="criteria">Введите количество критериев оптимизации:</label>
+          <input type="text" id="criteria" [(ngModel)]="columns" (ngModelChange)="updateMatrix()">
+        </div>
+      </div>
+      <div class="matrix">
+        <form [formGroup]="form">
+          <div class="matrix-headers">
+            <input type="text" *ngFor="let input of form.controls">
+          </div>
+          <div *ngFor="let row of form.controls;let i=index">
+            <input type="text">
+            <input *ngFor="let col of row.controls" [formControl]="col">
+          </div>
+        </form>
+      </div>
+  </div>
+</div>
