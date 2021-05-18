@@ -19,6 +19,7 @@ export class OptimizationPageComponent implements OnInit {
   answergetted: boolean = false
   answerString: string = ''
   error: boolean = false
+  secondError: boolean = false
 
   constructor(
     private optimizationService: OptimizationService
@@ -89,6 +90,9 @@ export class OptimizationPageComponent implements OnInit {
     }
     this.submitted = true
     this.error = false
+    this.secondError = false
+    this.answergetted = false
+    this.answer = undefined
     const optimizationTask: OptimizationCombinedObjectiveFunction = {
       width: this.columns,
       height: this.rows,
@@ -105,6 +109,8 @@ export class OptimizationPageComponent implements OnInit {
       if (error.error === "Invalid values")
       {
         this.error = true
+      } else {
+        this.secondError = true
       }
       this.submitted = false
     })
