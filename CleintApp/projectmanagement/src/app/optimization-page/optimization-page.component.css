@@ -44,26 +44,127 @@
   outline: none;
 }
 
-.matrix input {
+.matrix {
+  margin: 10px 10px;
+}
+.matrix-criteria {
+  width: 200px;
+  height: 30px;
+  margin-right: 10px;
+  border-radius: 15px;
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  padding: 5px 10px;
+}
+.matrix-criteria-wrap {
+  margin-left: 240px;
+}
+.matrix-criteria:focus {
+  outline: none;
+}
+.matrix-priority {
+  width: 200px;
+  height: 30px;
+  margin: 10px 0;
+  margin-right: 10px;
+  border-radius: 15px;
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  padding: 5px 10px;
+}
+.matrix-priority-wrap {
+  margin-left: 240px;
+}
+.matrix-priority:focus {
+  outline: none;
+}
+.matrix-direction {
+  width: 200px;
+  height: 30px;
+  margin: 10px 0;
+  margin-right: 10px;
+  border-radius: 15px;
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  padding: 5px 10px;
+}
+.matrix-direction:focus {
+  outline: none;
+}
+.matrix-rows {
+  margin: 0 20px;
+  border-radius: 15px;
+  height: 30px;
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  padding: 5px 10px;
+  width: 200px;
+}
+.matrix-rows:focus {
+  outline: none;
+}
+.matrix-data {
   background: rgba(196, 196, 196, 0.27);
   border-radius: 15px;
   border: none;
   height: 40px;
   padding: 5px 10px;
-  width: 50px;
+  width: 100px;
   font-family: Roboto, sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
+  margin: 5px 53px;
 }
-.matrix input::placeholder {
+.matrix-data::placeholder {
   font-family: Roboto, sans-serif;
   font-style: normal;
   font-weight: 300;
   font-size: 16px;
 }
-.matrix input:focus {
+.matrix-data:focus {
   outline: none;
+}
+
+.form-button {
+  width: 250px;
+  height: 38px;
+  background: var(--button-color);
+  border-radius: 25px;
+  border: none;
+  color: #FFFFFF;
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+}
+.form-button:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+.form-button.invalid {
+  opacity: 0.2;
+  cursor: default;
+  background: red;
+}
+
+.invalid-text {
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.green {
+  background: greenyellow;
 }
 
 /*# sourceMappingURL=optimization-page.component.css.map */

@@ -107,3 +107,11 @@ export interface TaskGantt {
   text: string
   progress: number
 }
+
+export interface OptimizationCombinedObjectiveFunction {
+  width: number
+  height: number
+  Weight: number[]
+  Direction: number[]
+  Data: any
+}

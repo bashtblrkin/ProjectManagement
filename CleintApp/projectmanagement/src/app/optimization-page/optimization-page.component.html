@@ -2,23 +2,63 @@
   <div class="wrap">
       <div class="options">
         <div class="options-wrap">
-          <label for="alternative" >Введите количество альтернативных решений:</label>
+          <label for="alternative" >Введите количество альтернативных решений (строки):</label>
           <input type="text" id="alternative" [(ngModel)]="rows" (ngModelChange)="updateMatrix()">
         </div>
         <div class="options-wrap">
-          <label for="criteria">Введите количество критериев оптимизации:</label>
+          <label for="criteria">Введите количество критериев оптимизации (столбцы):</label>
           <input type="text" id="criteria" [(ngModel)]="columns" (ngModelChange)="updateMatrix()">
         </div>
       </div>
       <div class="matrix">
-        <form [formGroup]="form">
-          <div class="matrix-headers">
-            <input type="text" *ngFor="let input of form.controls">
+        <form [formGroup]="form" (ngSubmit)="getAnswer()" class="form">
+          <div class="matrix-criteria-wrap">
+            <input type="text"
+                   *ngFor="let item of countColumns; let i = index"
+
+                   class="matrix-criteria"
+                   placeholder="Введите критерий">
           </div>
-          <div *ngFor="let row of form.controls;let i=index">
-            <input type="text">
-            <input *ngFor="let col of row.controls" [formControl]="col">
+          <div *ngFor="let row of getMatrixControls(form);let i=index">
+            <input type="text"
+                   class="matrix-rows"
+                   id = "answer.{{i}}"
+                   placeholder="Название решения"
+                   [ngClass]="{green: answer == i}"
+            >
+            <input
+              *ngFor="let col of row['controls']"
+              [formControl]="col"
+              class="matrix-data"
+              [ngClass]="{}"
+            >
           </div>
+          <div class="matrix-criteria-wrap">
+            <input type="text"
+                   *ngFor="let priority of getPriorityControls(form)"
+                   class="matrix-priority"
+                   [formControl]="priority"
+                   placeholder="Введите приоритет">
+          </div>
+          <div class="matrix-criteria-wrap">
+            <select
+              *ngFor="let direction of getDirectionControls(form)"
+              class="matrix-direction"
+              [formControl]="direction">
+              <option value="1">Max</option>
+              <option value="0">Min</option>
+            </select>
+          </div>
+          <button
+            type="submit"
+            class="form-button"
+            [ngClass]="{invalid: form.invalid || submitted}"
+            [disabled]="form.invalid || submitted"
+          >Получить решение
+          </button>
+          <div *ngIf="form.invalid" class="invalid-text">Все поля формы должны быть заполнены</div>
+          <div *ngIf="answergetted">Самым оптимальным решением является: {{answerString}}</div>
+          <div *ngIf="error">Введенны некорректные значения (максимальное и минимальное значения в столбцах не должно совпадать)</div>
         </form>
       </div>
   </div>

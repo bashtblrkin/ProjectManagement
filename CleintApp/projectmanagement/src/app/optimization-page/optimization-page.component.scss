@@ -44,17 +44,83 @@
   }
 }
 .matrix {
-  input {
+  margin: 10px 10px;
+  &-criteria {
+    width: 200px;
+    height: 30px;
+    margin-right: 10px;
+    border-radius: 15px;
+    font-family: Roboto, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    padding: 5px 10px;
+    &-wrap {
+      margin-left: 240px;
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+  &-priority {
+    width: 200px;
+    height: 30px;
+    margin: 10px 0;
+    margin-right: 10px;
+    border-radius: 15px;
+    font-family: Roboto, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    padding: 5px 10px;
+    &-wrap {
+      margin-left: 240px;
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+  &-direction {
+    width: 200px;
+    height: 30px;
+    margin: 10px 0;
+    margin-right: 10px;
+    border-radius: 15px;
+    font-family: Roboto, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    padding: 5px 10px;
+    &:focus {
+      outline: none;
+    }
+  }
+  &-rows {
+    margin: 0 20px;
+    &:focus {
+      outline: none;
+    }
+    border-radius: 15px;
+    height: 30px;
+    font-family: Roboto, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    padding: 5px 10px;
+    width: 200px;
+  }
+  &-data {
     background: rgba(196, 196, 196, 0.27);
     border-radius: 15px;
     border: none;
     height: 40px;
     padding: 5px 10px;
-    width: 50px;
+    width: 100px;
     font-family: Roboto, sans-serif;
     font-style: normal;
     font-weight: 500;
     font-size: 16px;
+    margin: 5px 53px;
     &::placeholder {
       font-family: Roboto, sans-serif;
       font-style: normal;
@@ -65,4 +131,38 @@
       outline: none;
     }
   }
+}
+.form {
+  &-button {
+    width: 250px;
+    height: 38px;
+    background: var(--button-color);
+    border-radius: 25px;
+    border: none;
+    color: #FFFFFF;
+    font-family: Roboto, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    &:hover {
+      opacity: 0.8;
+      cursor: pointer;
+    }
+    &.invalid {
+      opacity: 0.2;
+      cursor: default;
+      background: red;
+    }
+  }
+}
+
+.invalid-text {
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.green {
+  background: greenyellow;
 }
