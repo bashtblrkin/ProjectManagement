@@ -115,3 +115,8 @@ export interface OptimizationCombinedObjectiveFunction {
   Direction: number[]
   Data: any
 }
+
+export interface OptimizationAnswer {
+  answerArr: number[]
+  dir: string
+}

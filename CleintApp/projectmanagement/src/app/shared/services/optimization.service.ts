@@ -1,8 +1,9 @@
 import {Inject, Injectable} from '@angular/core';
-import {OptimizationCombinedObjectiveFunction} from '../interfaces/interfaces';
+import {OptimizationAnswer, OptimizationCombinedObjectiveFunction} from '../interfaces/interfaces';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {RESOURCE_API_URL} from '../../app-injection-tokens';
+import {map} from 'rxjs/operators';
 
 @Injectable({providedIn: 'root'})
 export class OptimizationService {
@@ -13,7 +14,7 @@ export class OptimizationService {
     ) {
   }
 
-  GetAnswerCombinedObjectiveFunction(task: OptimizationCombinedObjectiveFunction): Observable<number> {
-    return this.http.post<number>(`${this.apiUrl}api/optimization/combinedfunction`, task)
+  GetAnswerCombinedObjectiveFunction(task: OptimizationCombinedObjectiveFunction): Observable<OptimizationAnswer> {
+    return this.http.post<OptimizationAnswer>(`${this.apiUrl}api/optimization/combinedfunction`, task)
   }
 }

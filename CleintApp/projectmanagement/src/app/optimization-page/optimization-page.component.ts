@@ -14,10 +14,10 @@ export class OptimizationPageComponent implements OnInit {
   columns: number = 2
   countColumns: number[] = []
   form: FormGroup
+  answerArrayName: any
+  answerArrayNumber: any = []
   submitted: boolean = false
-  answer: number
   answergetted: boolean = false
-  answerString: string = ''
   error: boolean = false
   secondError: boolean = false
 
@@ -92,7 +92,6 @@ export class OptimizationPageComponent implements OnInit {
     this.error = false
     this.secondError = false
     this.answergetted = false
-    this.answer = undefined
     const optimizationTask: OptimizationCombinedObjectiveFunction = {
       width: this.columns,
       height: this.rows,
@@ -101,8 +100,93 @@ export class OptimizationPageComponent implements OnInit {
       Direction: this.form.controls['direction'].value
     }
     this.optimizationService.GetAnswerCombinedObjectiveFunction(optimizationTask).subscribe(res => {
-      this.answer = res
-      this.answerString = (document.getElementById(`answer.${this.answer}`) as HTMLInputElement).value
+
+      let answerObj: any = {}
+      for (let i =0; i < this.rows; i++)
+      {
+        answerObj[(document.getElementById(`answer.${i}`) as HTMLInputElement).value] = res.answerArr[i]
+      }
+      console.log(answerObj)
+
+      if (res.dir === 'min')
+      {
+        this.answerArrayName = Object.keys(answerObj).sort((a, b) => answerObj[a] - answerObj[b])
+      }
+      if (res.dir === 'max')
+      {
+        this.answerArrayName = Object.keys(answerObj).sort((a, b) => answerObj[b] - answerObj[a])
+      }
+
+      for (let i = 0; i < this.rows; i++)
+      {
+        this.answerArrayNumber[i] = answerObj[this.answerArrayName[i]]
+      }
+      console.log(this.answerArrayNumber)
+
+
+      let min = this.answerArrayNumber[0]
+      for (let i = 1; i < this.rows; i++)
+      {
+        if (this.answerArrayNumber[i] < min)
+        {
+          min = this.answerArrayNumber[i]
+        }
+      }
+      min = Math.abs(min)
+      console.log(min)
+      for (let i = 0; i < this.rows; i++)
+      {
+        this.answerArrayNumber[i] = ((this.answerArrayNumber[i]+min)*100)+1
+      }
+
+      let max = this.answerArrayNumber[0]
+      for (let i = 1; i < this.rows; i++)
+      {
+        if (this.answerArrayNumber[i] > max)
+        {
+          max = this.answerArrayNumber[i]
+        }
+      }
+      min = this.answerArrayNumber[0]
+      for (let i = 1; i < this.rows; i++)
+      {
+        if (this.answerArrayNumber[i] < min)
+        {
+          min = this.answerArrayNumber[i]
+        }
+      }
+      const delta = 100/max
+      console.log(delta)
+      if (res.dir === 'min')
+      {
+        for (let i = 0; i < this.rows; i++)
+        {
+          if (this.answerArrayNumber[i] == min) {
+            this.answerArrayNumber[i] = 100
+          } else if (this.answerArrayNumber[i] == max) {
+            this.answerArrayNumber[i] = 0
+          } else {
+            this.answerArrayNumber[i] = Math.trunc(100 - this.answerArrayNumber[i]*delta)
+
+          }
+        }
+      }
+
+      if (res.dir === 'max')
+      {
+        for (let i = 0; i < this.rows; i++)
+        {
+          if (this.answerArrayNumber[i] == max) {
+            this.answerArrayNumber[i] = 100
+          } else if (this.answerArrayNumber[i] == min) {
+            this.answerArrayNumber[i] = 0
+          } else {
+            this.answerArrayNumber[i] = Math.trunc(this.answerArrayNumber[i]*delta)
+
+          }
+        }
+      }
+
       this.submitted = false
       this.answergetted = true
     }, error => {

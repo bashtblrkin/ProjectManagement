@@ -162,7 +162,7 @@ namespace ProjectManagement.Resource.API.cotntrollers
                                 matrix.Direction[i] = -1;
                             }
                         }
-                    }
+                    } else
                     if (matrix.Direction[idx] == 1)
                     {
                         direction = 1;
@@ -190,31 +190,36 @@ namespace ProjectManagement.Resource.API.cotntrollers
                 }
 
                 //поиск оптимального варианта из итогового массива
-                if (direction == 0)
+                /*  if (direction == 0)
+                  {
+                      minAns = answerArray[0];
+                      for (int i = 1; i < matrix.height; i++)
+                      {
+                          if (answerArray[i] < minAns)
+                          {
+                              minAns = answerArray[i];
+                              answer = i;
+                          }
+                      }
+                  }
+                  if (direction == 1)
+                  {
+                      maxAns = answerArray[0];
+                      for (int i = 1; i < matrix.height; i++)
+                      {
+                          if (answerArray[i] > maxAns)
+                          {
+                              maxAns = answerArray[i];
+                              answer = i;
+                          }
+                      }
+                  }*/
+                OptimizationAnswer fullanswer = new OptimizationAnswer()
                 {
-                    minAns = answerArray[0];
-                    for (int i = 1; i < matrix.height; i++)
-                    {
-                        if (answerArray[i] < minAns)
-                        {
-                            minAns = answerArray[i];
-                            answer = i;
-                        }
-                    }
-                }
-                if (direction == 1)
-                {
-                    maxAns = answerArray[0];
-                    for (int i = 1; i < matrix.height; i++)
-                    {
-                        if (answerArray[i] > maxAns)
-                        {
-                            maxAns = answerArray[i];
-                            answer = i;
-                        }
-                    }
-                }
-                return Ok(answer);
+                    answerArr = answerArray,
+                    dir = direction == 1 ? "max" : "min"
+                };
+                return Ok(fullanswer);
             }
             return BadRequest();
         }
